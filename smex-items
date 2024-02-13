@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
+ shell
+ shell-command
  grep-mode
  projectile-ripgrep
- shell-command
  package-install
  compile
  complete-tag
- eval-buffer
 )
 
 ;; ----- smex-data -----
@@ -16,10 +16,10 @@
  (package-install . 6)
  (package-refresh-contents . 1)
  (grep-find . 1)
- (shell . 1)
+ (shell . 3)
  (complete-tag . 1)
  (compile . 8)
  (projectile-ripgrep . 4)
- (shell-command . 2)
+ (shell-command . 4)
  (grep-mode . 1)
 )
