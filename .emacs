@@ -176,6 +176,8 @@
 
 (yas-global-mode 1)
 
+(setq mouse-wheel-mode nil)
+
 ;;; word-wrap
 (defun rc/enable-word-wrap ()
   (interactive)
@@ -253,21 +255,21 @@
 (add-hook 'rust-mode-hook #'lsp)
 (setq lsp-rust-server 'rust-analyzer)
 
-;(require 'company)
-;add-hook 'rust-mode-hook 'company-mode)
-;setq company-tooltip-align-annotations t)
+(require 'company)
+(add-hook 'rust-mode-hook 'company-mode)
+(setq company-tooltip-align-annotations t)
+
+(add-hook 'rust-mode-hook
+ (lambda ()
+   (local-set-key (kbd "<tab>") 'company-indent-or-complete-common)
+   (local-set-key (kbd "S-<tab>") 'company-select-previous)
+   ))
 ;
-;add-hook 'rust-mode-hook
-; (lambda ()
-;   (local-set-key (kbd "<tab>") 'company-indent-or-complete-common)
-;   (local-set-key (kbd "S-<tab>") 'company-select-previous)
-;   ))
-;
-;defun my-company-select-previous (&optional arg)
-; (interactive "p")
-; (company-select-previous arg))
-;
-;define-key evil-normal-state-map (kbd "C-.") 'my-company-select-previous)
+(defun my-company-select-previous (&optional arg)
+ (interactive "p")
+ (company-select-previous arg))
+
+(define-key evil-normal-state-map (kbd "C-.") 'my-company-select-previous)
 (electric-pair-mode 1)
 
 ;; Настраиваем, что будет вставляться
@@ -293,6 +295,29 @@
 (define-key company-active-map (kbd "S-<tab>") 'company-select-previous)
 (setq-default buffer-display-table (make-display-table))
 (global-set-key (kbd "C-x 3") 'split-window-right)
+
+(define-key evil-normal-state-map (kbd "C-.") 'evil-repeat)
+
+(add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c-mode))
+
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (c-set-style "stroustrup")))
+(add-hook 'c-mode-common-hook 'company-mode)
+(add-hook 'c-mode-common-hook 'ggtags-mode)
+(add-hook 'c-mode-common-hook 'flycheck-mode)
+
+(use-package counsel-etags
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook
+            (lambda ()
+              (add-hook 'after-save-hook
+                        'counsel-etags-virtual-update-tags 'append)))
+  :bind
+  (:map evil-normal-state-map
+        ("C-]" . counsel-etags-grep)))
 
 (evil-define-key 'normal 'grep-find-mode-map
   (kbd "C-h") 'evil-window-left
