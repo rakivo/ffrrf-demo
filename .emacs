@@ -1,5 +1,34 @@
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
+(setq x-super-keysym 'meta)         
+(setq x-alt-keysym 'capslock)       
+
+(defun insert-line-below ()
+  "Insert an empty line below the current line."
+  (interactive)
+  (save-excursion
+    (end-of-line)
+    (open-line 1)))
+
+(defun insert-line-above ()
+  "Insert an empty line above the current line."
+  (interactive)
+  (save-excursion
+    (end-of-line 0)
+    (open-line 1)))
+
+(set-input-method 'english-dvorak)
+
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
+
+(global-set-key (kbd "C-x p s") 'previous-buffer)
+(global-set-key (kbd "C-x n s") 'next-buffer)
+(global-set-key (kbd "M-o") 'insert-line-below)
 (add-to-list 'load-path "~/.emacs.local/")
 
 (load "~/.emacs.rc/rc.el")
@@ -8,12 +37,11 @@
 (load "~/.emacs.rc/org-mode-rc.el")
 (load "~/.emacs.rc/autocommit-rc.el")
 
-(unless (package-installed-p 'evil)
-  (package-install 'evil))
+;(unless (package-installed-p 'evil)
+;  (package-install 'evil))
 
-;; Активация Evil
-(require 'evil)
-(evil-mode 1)
+;(require 'evil)
+;(evil-mode 1)
 
 ;;; Appearance
 (defun rc/get-default-font ()
@@ -249,30 +277,56 @@
 ;;; Ebisp
 (add-to-list 'auto-mode-alist '("\\.ebi\\'" . lisp-mode))
 
-;;; Rust
-(require 'lsp-mode)
-(require 'lsp-ui)
-(add-hook 'rust-mode-hook #'lsp)
-(setq lsp-rust-server 'rust-analyzer)
+;(evil-define-key 'normal c-mode-map (kbd "C-]") 'lsp-find-definition)
 
-(require 'company)
-(add-hook 'rust-mode-hook 'company-mode)
-(setq company-tooltip-align-annotations t)
+(require 'lsp-mode)                                                 
+(require 'lsp-ui)                                                   
+;(add-hook 'rust-mode-hook #'lsp)                                    
+;(setq lsp-rust-server 'rust-analyzer)                               
+                                                                    
+(require 'company)                                                  
+(add-hook 'rust-mode-hook 'company-mode)                            
+; (setq company-tooltip-align-annotations t)                        
+;;                                                                     ;;
+;; (add-hook 'rust-mode-hook                                           ;;
+;;  (lambda ()                                                         ;;
+;;    (local-set-key (kbd "<tab>") 'company-indent-or-complete-common) ;;
+;;    (local-set-key (kbd "S-<tab>") 'company-select-previous)         ;;
+;;    ))                                                               ;;
+;; ;                                                                   ;;
+;; (defun my-company-select-previous (&optional arg)                   ;;
+;;  (interactive "p")                                                  ;;
+;;  (company-select-previous arg))                                     ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-hook 'rust-mode-hook
- (lambda ()
-   (local-set-key (kbd "<tab>") 'company-indent-or-complete-common)
-   (local-set-key (kbd "S-<tab>") 'company-select-previous)
-   ))
-;
-(defun my-company-select-previous (&optional arg)
- (interactive "p")
- (company-select-previous arg))
-
-(define-key evil-normal-state-map (kbd "C-.") 'my-company-select-previous)
+;(define-key evil-normal-state-map (kbd "C-.") 'my-company-select-previous)
 (electric-pair-mode 1)
 
-;; Настраиваем, что будет вставляться
+(use-package cedet
+  :ensure t
+  :config
+  (semantic-mode 1))
+
+(defun semantic-display-tag (&optional pt)
+  "Display tag at point."
+  (interactive "d")
+  (unless pt (setq pt (point)))
+  (if (and (boundp 'semantic-mode) semantic-mode)
+      (let (analyze tag buf start)
+        (when (and (setq analyze (semantic-analyze-current-context pt))
+                   (setq tag (semantic-analyze-interesting-tag analyze))
+                   (setq buf (semantic-tag-buffer tag))
+                   (setq start (semantic-tag-start tag)))
+          (with-selected-window (display-buffer buf #'display-buffer-pop-up-window)
+            (goto-char start)
+            (recenter))))
+    (message "Semantic mode is not active in this buffer.")))
+
+(global-set-key (kbd "C-c , d") #'semantic-display-tag)
+(easy-menu-add-item cedet-menu-map '("Navigate Tags") ["Display Tag" semantic-display-tag (semantic-active-p)] 'semantic-complete-jump-local)
+
+(global-set-key (kbd "C-/") 'comment-or-uncomment-region)
+
 (setq electric-pair-pairs '(
                             (?\" . ?\")
                             (?\{ . ?\})
@@ -284,19 +338,19 @@
   (ansi-color-apply-on-region compilation-filter-start (point-max)))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
-(require 'evil)
-(define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-(define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
-(define-key evil-insert-state-map (kbd "C-u")
-  (lambda ()
-    (interactive)
-    (evil-delete (point-at-bol) (point))))
+;(require 'evil)
+;(define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+;(define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
+;(define-key evil-insert-state-map (kbd "C-u")
+;  (lambda ()
+;    (interactive)
+;    (evil-delete (point-at-bol) (point))))
 (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
 (define-key company-active-map (kbd "S-<tab>") 'company-select-previous)
 (setq-default buffer-display-table (make-display-table))
 (global-set-key (kbd "C-x 3") 'split-window-right)
 
-(define-key evil-normal-state-map (kbd "C-.") 'evil-repeat)
+;(define-key evil-normal-state-map (kbd "C-.") 'evil-repeat)
 
 (add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c-mode))
@@ -308,28 +362,26 @@
 (add-hook 'c-mode-common-hook 'ggtags-mode)
 (add-hook 'c-mode-common-hook 'flycheck-mode)
 
-(use-package counsel-etags
-  :ensure t
-  :config
-  (add-hook 'prog-mode-hook
-            (lambda ()
-              (add-hook 'after-save-hook
-                        'counsel-etags-virtual-update-tags 'append)))
-  :bind
-  (:map evil-normal-state-map
-        ("C-]" . counsel-etags-grep)))
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode 'rust-mode)
+              (ggtags-mode 1))))
 
-(evil-define-key 'normal 'grep-find-mode-map
-  (kbd "C-h") 'evil-window-left
-  (kbd "C-j") 'evil-window-down
-  (kbd "C-k") 'evil-window-up
-  (kbd "C-l") 'evil-window-right)
+;(evil-global-set-key 'normal (kbd "C-]") 'grep-find)
 
-(evil-define-key 'normal 'compilation-mode-map
-  (kbd "C-h") 'evil-window-left
-  (kbd "C-j") 'evil-window-down
-  (kbd "C-k") 'evil-window-up
-  (kbd "C-l") 'evil-window-right)
+;(evil-define-key 'normal 'grep-find-mode-map
+;  (kbd "C-h") 'evil-window-left
+;  (kbd "C-j") 'evil-window-down
+;  (kbd "C-k") 'evil-window-up
+;  (kbd "C-l") 'evil-window-right)
+;
+;(evil-define-key 'visual evil-normal-state-map (kbd "C-/") 'comment-uncomment-region)
+;
+;(evil-define-key 'normal 'compilation-mode-map
+;  (kbd "C-h") 'evil-window-left
+;  (kbd "C-j") 'evil-window-down
+;  (kbd "C-k") 'evil-window-up
+;  (kbd "C-l") 'evil-window-right)
 
 ;;; Packages that don't require configuration
 (rc/require
@@ -399,7 +451,7 @@
 (global-set-key (kbd "C-c p") 'projectile-command-map)
 (global-set-key (kbd "C-c p b") 'projectile-switch-to-buffer)
 
-(evil-set-undo-system 'undo-redo)
+;(evil-set-undo-system 'undo-redo)
 
 (require 'compile)
 
@@ -425,7 +477,7 @@ compilation-error-regexp-alist-alist
    '(org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-irc org-mhe org-rmail org-w3m))
  '(org-refile-use-outline-path 'file)
  '(package-selected-packages
-   '(projectile ivy ryo-modal lsp-ui lsp-mode rainbow-mode proof-general elpy hindent ag qml-mode racket-mode php-mode go-mode kotlin-mode nginx-mode toml-mode dockerfile-mode nix-mode purescript-mode markdown-mode jinja2-mode nim-mode csharp-mode rust-mode cmake-mode clojure-mode graphviz-dot-mode lua-mode tuareg glsl-mode yaml-mode d-mode scala-mode move-text nasm-mode editorconfig tide company powershell js2-mode yasnippet multiple-cursors magit haskell-mode paredit ido-completing-read+ smex gruber-darker-theme org-cliplink dash-functional dash))
+   '(ggtags parinfer-rust-mode magit-gitflow projectile ivy ryo-modal lsp-ui lsp-mode rainbow-mode proof-general elpy hindent ag qml-mode racket-mode php-mode go-mode kotlin-mode nginx-mode toml-mode dockerfile-mode nix-mode purescript-mode markdown-mode jinja2-mode nim-mode csharp-mode rust-mode cmake-mode clojure-mode graphviz-dot-mode lua-mode tuareg glsl-mode yaml-mode d-mode scala-mode move-text nasm-mode editorconfig tide company powershell js2-mode yasnippet multiple-cursors magit haskell-mode paredit ido-completing-read+ smex gruber-darker-theme org-cliplink dash-functional dash))
  '(safe-local-variable-values
    '((eval progn
            (auto-revert-mode 1)
@@ -439,3 +491,4 @@ compilation-error-regexp-alist-alist
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'scroll-left 'disabled nil)

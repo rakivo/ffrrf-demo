@@ -1,25 +1,64 @@
 
 ;; ----- smex-history -----
 (
- shell
- shell-command
- grep-mode
- projectile-ripgrep
- package-install
  compile
- complete-tag
+ indent-region
+ recover-this-file
+ query-replace
+ rust-mode
+ c-mode
+ magit-merge-nocommit
 )
 
 ;; ----- smex-data -----
 (
- (eval-buffer . 3)
- (package-install . 6)
- (package-refresh-contents . 1)
- (grep-find . 1)
- (shell . 3)
- (complete-tag . 1)
- (compile . 8)
+ (eval-buffer . 6)
+ (package-install . 15)
+ (package-refresh-contents . 8)
+ (grep-find . 6)
+ (shell . 5)
+ (complete-tag . 2)
+ (compile . 680)
  (projectile-ripgrep . 4)
- (shell-command . 4)
+ (shell-command . 7)
  (grep-mode . 1)
+ (grep . 4)
+ (counsel-etags-find-tag . 1)
+ (counsel-etags-grep . 2)
+ (c-mode . 26)
+ (list-packages . 1)
+ (xref-find-definitions . 10)
+ (query-replace . 37)
+ (replace-regexp . 1)
+ (rust-mode . 10)
+ (indent-to . 4)
+ (indent-region . 14)
+ (indent-relative . 3)
+ (magit-version . 1)
+ (magit-status . 1)
+ (parinfer-rust-mode . 1)
+ (exit-minibuffer . 1)
+ (comment-indent . 2)
+ (comment-or-uncomment-region . 5)
+ (find-tag . 4)
+ (semantic-display-tag . 1)
+ (find-function . 1)
+ (counsel-rg . 1)
+ (package-install-selected-packages . 2)
+ (projectile-find-tag . 2)
+ (find-tag-regexp . 1)
+ (semantic-symref-find-tags-by-regexp . 1)
+ (set-input-method . 2)
+ (recover-this-file . 2)
+ (mark-sexp . 2)
+ (markdown-blockquote-region . 1)
+ (markdown-shifttab . 1)
+ (indent-rigidly . 1)
+ (indent-sexp . 1)
+ (indent-tabs-mode . 1)
+ (align . 1)
+ (align-regexp . 1)
+ (align-newline-and-indent . 1)
+ (magit-merge-nocommit . 2)
+ (cmake-help . 1)
 )

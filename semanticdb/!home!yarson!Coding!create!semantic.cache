@@ -1,0 +1,345 @@
+;; Object semanticdb-project-database-file-175b7047087e
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semanticdb-project-database-file-175b7047087e"
+  :tables
+  (list
+    (semanticdb-table "semanticdb-table-175b7047083e"
+      :major-mode c-mode
+      :tags 
+        '( ("GEN" variable (:constant-flag t) nil [21 24])
+            ("stdio.h" include (:system-flag t) nil [26 44])
+            ("stdlib.h" include (:system-flag t) nil [45 64])
+            ("string.h" include (:system-flag t) nil [65 84])
+            ("DIR_CAP" variable (:constant-flag t) nil [94 101])
+            ("FILE_CAP" variable (:constant-flag t) nil [123 131])
+            ("FILE_CAP" variable (:constant-flag t) nil [123 131])
+            ("FILE_CAP" variable (:constant-flag t) nil [123 131])
+            ("FILE_CAP" variable (:constant-flag t) nil [123 131])
+            ("FILE_CAP" variable (:constant-flag t) nil [123 131])
+            ("FILE_CAP" variable (:constant-flag t) nil [123 131])
+            ("CONTENT_CAP" variable (:constant-flag t) nil [152 163])
+            ("CONTENT_CAP" variable (:constant-flag t) nil [152 163])
+            ("CONTENT_CAP" variable (:constant-flag t) nil [152 163])
+            ("CONTENT_CAP" variable (:constant-flag t) nil [152 163])
+            ("CONTENT_CAP" variable (:constant-flag t) nil [152 163])
+            ("CONTENTS_CAP" variable (:constant-flag t) nil [181 193])
+            ("CONTENTS_CAP" variable (:constant-flag t) nil [181 193])
+            ("CONTENTS_CAP" variable (:constant-flag t) nil [181 193])
+            ("CONTENTS_CAP" variable (:constant-flag t) nil [181 193])
+            ("CONTENTS_CAP" variable (:constant-flag t) nil [181 193])
+            ("CONTENTS_CAP" variable (:constant-flag t) nil [181 193])
+            ("MOD_CONTENTS_CAP" variable (:constant-flag t) nil [208 224])
+            ("MOD_CONTENTS_CAP" variable (:constant-flag t) nil [208 224])
+            ("MOD_CONTENTS_CAP" variable (:constant-flag t) nil [227 227])
+            ("LANGS_CAP" variable (:constant-flag t) nil [235 244])
+            ("LANGS" variable
+               (:pointer 1
+                :dereference 1
+                :typemodifiers ("extern")
+                :constant-flag t
+                :type "char")
+                nil [256 298])
+            ("is_dir_exists" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("dir_path" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [318 339]))                  
+                :type "int")
+                nil [300 340])
+            ("create_dir_" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("dir_path" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [357 378]))                  
+                :type "int")
+                nil [341 379])
+            ("create_dirs" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("dir_path" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [396 417]))                  
+                :type "int")
+                nil [380 418])
+            ("gen_" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("fptr" variable
+                       (:pointer 2
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [430 442])
+                    ("file_name" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [443 465])
+                    ("extens" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [466 485])
+                    ("idx" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [486 507]))                  
+                :type "void")
+                nil [420 508])
+            ("gen_mod_" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("fptr" variable
+                       (:pointer 2
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [523 535])
+                    ("file_name" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [536 558])
+                    ("dir" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [559 577])
+                    ("extens" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [578 597])
+                    ("idx" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [598 619]))                  
+                :type "void")
+                nil [509 620]))          
+      :file "gen.h"
+      :pointmax 636
+      :fsize 635
+      :lastmodtime '(26076 50264 753738 708000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("DIR_CAP" . ((number "100" 111 . 114)))
+          ("CONTENT_CAP" . ((number "125" 169 . 172)))
+          ("FILE_CAP" . ((number "256" 140 . 143)))
+          ("CONTENTS_CAP" . ((number "8" 198 . 199)))
+          ("GEN")
+          ("MOD_CONTENTS_CAP" . ((number "2" 225 . 226)))
+          ("LANGS_CAP" . ((number "7" 252 . 253)))
+          )
+)
+    (semanticdb-table "semanticdb-table-175b7047085e"
+      :major-mode c-mode
+      :tags 
+        '( ("gen.h" include nil nil [1 17])
+            ("CONTENTS" variable
+               (:pointer 1
+                :dereference 1
+                :constant-flag t
+                :default-value "{
+    \"#include <stdio.h>\\n\\nint main(void) {\\n    printf(\\\"hello, world\\\\n\\\");\\n    return 0;\\n}\",
+    \"fn main() {\\n    println!(\\\"hello, world\\\");\\n}\",
+    \"#include <iostream>\\n\\nint main(void) {\\n    std::cout << \\\"hello, world\\\" << std::endl;\\n    return 0;\\n}\",
+    \"console.log(\\\"hello, world\\\");\",
+    \"package main\\n\\nimport \\\"fmt\\\"\\n\\nfunc main() {\\n    fmt.Println(\\\"hello, world\\\")\\n}\",
+    \"print(\\\"hello, world\\\");\",
+    \"<?php\\necho \\\"hello, world\\\";\\n?>\"
+}"
+                :type "char")
+                nil [19 536])
+            ("TOML_MOD_CONTENT" variable (:constant-flag t) nil [546 562])
+            ("GO_MOD_CONTENT" variable (:constant-flag t) nil [703 717])
+            ("GO_MOD_CONTENT" variable (:constant-flag t) nil [703 717])
+            ("GO_MOD_CONTENT" variable (:constant-flag t) nil [703 717])
+            ("SET_MOD" variable (:constant-flag t) nil [754 761])
+            ("SET_MOD_CONTENT" variable (:constant-flag t) nil [838 853])
+            ("CREATING" variable (:constant-flag t) nil [1124 1132])
+            ("gen_mod_" function
+               (:arguments 
+                  ( ("fptr" variable
+                       (:pointer 2
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1248 1260])
+                    ("file_name" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1261 1283])
+                    ("dir" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1284 1302])
+                    ("extens" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1303 1322])
+                    ("idx" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [1323 1344]))                  
+                :type "void")
+                nil [1234 2154])
+            ("gen_" function
+               (:arguments 
+                  ( ("fptr" variable
+                       (:pointer 2
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2166 2178])
+                    ("file_name" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [2179 2201])
+                    ("extens" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [2202 2221])
+                    ("idx" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [2222 2243]))                  
+                :type "void")
+                nil [2156 2412]))          
+      :file "gen.c"
+      :pointmax 2413
+      :fsize 2520
+      :lastmodtime '(26076 52005 826950 874000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("SET_MOD_CONTENT" (spp-arg-list ("mod_file" "file_name" "sample" "...") 853 . 887) . 
+              ((DO "do" 888 . 890) (semantic-list "{ \\
+        _Pragma(\"GCC diagnostic ignored \\\"-Wformat-extra-args\\\"\") \\
+        _Pragma(\"GCC diagnostic ignored \\\"-Wunused-value\\\"\") \\
+        snprintf(mod_file, FILE_CAP, sample, file_name, ##__VA_ARGS__); \\
+    }" 891 . 1105) (WHILE "while" 1106 . 1111) (semantic-list "(0)" 1112 . 1115)))
+          ("SET_MOD" (spp-arg-list ("file" "dir" "content") 761 . 781) . ((symbol "snprintf" 782 . 790) (semantic-list "(file, FILE_CAP, \"%s/%s\", dir, content)" 790 . 829)))
+          ("GO_MOD_CONTENT" . ((string "\"module %s\\n\\ngo 1.22.0\"" 720 . 744)))
+          ("CREATING" (spp-arg-list ("file_name" "extens" "content") 1132 . 1160) . 
+              ((symbol "fprintf" 1161 . 1168) (semantic-list "(stdout, \"Creating %s.%s:\\n%s\\n\\n\", file_name, extens, content)" 1168 . 1231) (punctuation ";" 1231 . 1232)))
+          ("TOML_MOD_CONTENT" . ((string "\"[package]\\nname = \\\"%s\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[dependencies]\\n\\n[[bin]]\\nname = \\\"%s\\\"\\npath = \\\"./%s.rs\\\"\"" 563 . 694)))
+          )
+)
+    (semanticdb-table "semanticdb-table-175b702716b0"
+      :major-mode c-mode
+      :tags 
+        '( ("gen.h" include nil nil [1 17])
+            ("LANGS" variable
+               (:pointer 1
+                :dereference 1
+                :constant-flag t
+                :default-value "{
+    \"c\", \"rs\", \"cpp\", \"js\", \"go\", \"php\", \"pas\", \"py\", \"lua\", \"kt\"
+}"
+                :type "char")
+                nil [19 126])
+            ("lang_check" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("lang" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [228 245]))                  
+                :type "int")
+                nil [206 390])
+            ("LANG_NAME_CONFLICT" variable (:constant-flag t) nil [400 418])
+            ("check_conficts" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("file_name" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [540 562])
+                    ("lang" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [563 580])
+                    ("dir" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [581 599]))                  
+                :type "int")
+                nil [514 910])
+            ("generate" function
+               (:typemodifiers ("static")
+                :arguments 
+                  ( ("fptr" variable
+                       (:pointer 2
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [988 1000])
+                    ("file_name" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1001 1023])
+                    ("file" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1024 1044])
+                    ("dir" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1045 1063])
+                    ("idx" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [1064 1085]))                  
+                :type "void")
+                nil [967 1479])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [1490 1499])
+                    ("argv" variable
+                       (:pointer 2
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1500 1512]))                  
+                :type "int")
+                nil [1481 2902]))          
+      :file "main.c"
+      :pointmax 2903
+      :fsize 2902
+      :lastmodtime '(26076 51775 283846 751000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("LANG_NAME_CONFLICT" (spp-arg-list ("lang" "file_name") 418 . 435) . 
+              ((symbol "fprintf" 436 . 443) (semantic-list "(stderr, \"lang: %s, and name: %s is a conflicts\\n\", lang, file_name)" 443 . 511) (punctuation ";" 511 . 512)))
+          )
+)
+    (semanticdb-table "semanticdb-table-175b704e9f6c"
+      :major-mode makefile-gmake-mode
+      :tags 
+        '( ("CC" variable (:default-value ("gcc")) nil [1 10])
+            ("CFLAGS" variable (:default-value ("-g" "-Wall" "-Wextra" "-pedantic" "-std=c99")) nil [10 55])
+            ("SRC_DIR" variable (:default-value ("./src/")) nil [55 72])
+            ("BUILD_DIR" variable (:default-value (".")) nil [72 86])
+            ("SRCS" variable (:default-value ("$(wildcard $(SRC_DIR)/*.c)")) nil [87 121])
+            ("OBJS" variable (:default-value ("$(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)")) nil [121 168])
+            ("TARGET" variable (:default-value ("create")) nil [169 185])
+            (".PHONY" function (:arguments ("all" "clean")) nil [186 204])
+            ("all" function (:arguments ("$(TARGET)" "clean")) nil [205 227])
+            ("$(TARGET)" function (:arguments ("$(OBJS)")) nil [228 273])
+            ("$(BUILD_DIR)" function (:arguments ("$(SRC_DIR)/%.c")) nil [274 336])
+            ("clean" function nil nil [337 369]))          
+      :file "Makefile"
+      :pointmax 369
+      :fsize 368
+      :lastmodtime '(26076 52092 945592 37000)
+      :unmatched-syntax nil))
+  :file "!home!yarson!Coding!create!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

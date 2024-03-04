@@ -1,0 +1,102 @@
+;; Object semanticdb-project-database-file-19207f86fdce
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semanticdb-project-database-file-19207f86fdce"
+  :tables
+  (list
+    (semanticdb-table "semanticdb-table-19207f955950"
+      :major-mode c-mode
+      :tags 
+        '( ("gen.h" include nil nil [1 17])
+            ("CONTENTS" variable
+               (:pointer 1
+                :dereference 1
+                :constant-flag t
+                :default-value "{
+    \"#include <stdio.h>\\n\\nint main(void) {\\n    printf(\\\"hello, world\\\\n\\\");\\n    return 0;\\n}\",
+    \"fn main() {\\n    println!(\\\"hello, world\\\");\\n}\",
+    \"#include <iostream>\\n\\nint main(void) {\\n    std::cout << \\\"hello, world\\\" << std::endl;\\n    return 0;\\n}\",
+    \"console.log(\\\"hello, world\\\");\",
+    \"package main\\n\\nimport \\\"fmt\\\"\\n\\nfunc main() {\\n    fmt.Println(\\\"hello, world\\\")\\n}\",
+    \"print(\\\"hello, world\\\");\",
+    \"<?php\\necho \\\"hello, world\\\";\\n?>\"
+}"
+                :type "char")
+                nil [19 536])
+            ("TOML_MOD_CONTENT" variable (:constant-flag t) nil [546 562])
+            ("GO_MOD_CONTENT" variable (:constant-flag t) nil [703 717])
+            ("SET_MOD" variable (:constant-flag t) nil [754 761])
+            ("SET_MOD_CONTENT" variable (:constant-flag t) nil [838 853])
+            ("CREATING" variable (:constant-flag t) nil [1131 1139])
+            ("CREATING" variable (:constant-flag t) nil [1131 1139])
+            ("gen_mod_" function
+               (:arguments 
+                  ( ("fptr" variable
+                       (:pointer 2
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [1255 1267])
+                    ("file_name" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1268 1290])
+                    ("dir" variable
+                       (:dereference 1
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1291 1309])
+                    ("extens" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [1310 1329])
+                    ("idx" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [1330 1351]))                  
+                :type "void")
+                nil [1241 2161])
+            ("gen_" function
+               (:arguments 
+                  ( ("fptr" variable
+                       (:pointer 2
+                        :type ("FILE" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [2173 2185])
+                    ("file_name" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [2186 2208])
+                    ("extens" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [2209 2228])
+                    ("idx" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [2229 2250]))                  
+                :type "void")
+                nil [2163 2419]))          
+      :file "movements.c"
+      :pointmax 2420
+      :fsize 2419
+      :lastmodtime '(26076 41411 633492 595000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("SET_MOD_CONTENT" (spp-arg-list ("mod_file" "file_name" "sample" "...") 853 . 887) . 
+              ((DO "do" 888 . 890) (semantic-list "{ \\
+        _Pragma(\"GCC diagnostic ignored \\\"-Wformat-extra-args\\\"\") \\
+nnn        _Pragma(\"GCC diagnostic ignored \\\"-Wunused-value\\\"\") \\
+        snprintf(mod_file, FILE_CAP, sample, file_name, ##__VA_ARGS__); \\
+    }" 891 . 1108) (WHILE "while" 1109 . 1114) (semantic-list "(0)" 1115 . 1118)))
+          ("SET_MOD" (spp-arg-list ("file" "dir" "content") 761 . 781) . ((symbol "snprintf" 782 . 790) (semantic-list "(file, FILE_CAP, \"%s/%s\", dir, content)" 790 . 829)))
+          ("GO_MOD_CONTENT" . ((string "\"module %s\\n\\ngo 1.22.0\"" 720 . 744)))
+          ("CREATING" (spp-arg-list ("file_name" "extens" "content") 1139 . 1167) . 
+              ((symbol "fprintf" 1168 . 1175) (semantic-list "(stdout, \"Creating %s.%s:\\n%s\\n\\n\", file_name, extens, content)" 1175 . 1238) (punctuation ";" 1238 . 1239)))
+          ("TOML_MOD_CONTENT" . ((string "\"[package]\\nname = \\\"%s\\\"\\nversion = \\\"0.1.0\\\"\\nedition = \\\"2021\\\"\\n\\n[dependencies]\\n\\n[[bin]]\\nname = \\\"%s\\\"\\npath = \\\"./%s.rs\\\"\"" 563 . 694)))
+          )
+))
+  :file "!home!yarson!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

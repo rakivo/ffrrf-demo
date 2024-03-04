@@ -1,0 +1,21 @@
+;; Object semanticdb-project-database-file-15c60f3b7bfe
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semanticdb-project-database-file-15c60f3b7bfe"
+  :tables
+  (list
+    (semanticdb-table "semanticdb-table-15c60f3b7c2a"
+      :major-mode c-mode
+      :tags 
+        '( ("std::fs::File" variable (:type ("use" type (:type "class") nil nil)) nil [113 131])
+            ("str" variable
+               (:default-value "\"test\""
+                :type "int")
+                nil [2517 2531]))          
+      :file "main.rs"
+      :pointmax 2721
+      :fsize 2726
+      :lastmodtime '(26079 19992 737153 499000)
+      :unmatched-syntax '((semantic-list 2565 . 2720) (punctuation 2563 . 2564) (semantic-list 2561 . 2563) (punctuation 2560 . 2561) (symbol 2554 . 2560) (punctuation 2553 . 2554) (punctuation 2552 . 2553) (symbol 2550 . 2552) (punctuation 2549 . 2550) (punctuation 2548 . 2549) (symbol 2545 . 2548) (punctuation 2543 . 2544) (punctuation 2542 . 2543) (semantic-list 2539 . 2541) (symbol 2535 . 2539) (symbol 2532 . 2534) (punctuation 2515 . 2516) (symbol 2506 . 2515) (CONST 2500 . 2505) (semantic-list 1295 . 2498) (punctuation 1293 . 1294) (semantic-list 1291 . 1293) (punctuation 1290 . 1291) (symbol 1284 . 1290) (punctuation 1283 . 1284) (punctuation 1282 . 1283) (symbol 1280 . 1282) (punctuation 1279 . 1280) (punctuation 1278 . 1279) (symbol 1275 . 1278) (punctuation 1273 . 1274) (punctuation 1272 . 1273) (semantic-list 1217 . 1271) (symbol 1207 . 1217) (punctuation 1264 . 1265) (punctuation 1248 . 1249) (punctuation 1229 . 1230) (symbol 1204 . 1206) (punctuation 1264 . 1265) (punctuation 1248 . 1249) (punctuation 1229 . 1230) (semantic-list 1042 . 1202) (symbol 1034 . 1041) (punctuation 1032 . 1033) (symbol 1021 . 1032) (semantic-list 275 . 1019) (symbol 268 . 274) (symbol 263 . 267) (semantic-list 237 . 261) (symbol 230 . 236) (STRUCT 223 . 229) (semantic-list 250 . 259) (punctuation 248 . 249) (symbol 243 . 248) (semantic-list 250 . 259) (punctuation 248 . 249) (symbol 243 . 248) (semantic-list 197 . 221) (symbol 190 . 196) (ENUM 185 . 189) (semantic-list 169 . 184) (punctuation 168 . 169) (punctuation 111 . 112) (semantic-list 63 . 111) (punctuation 62 . 63) (punctuation 61 . 62) (symbol 59 . 61) (punctuation 58 . 59) (punctuation 57 . 58) (symbol 54 . 57) (symbol 50 . 53) (semantic-list 26 . 49) (punctuation 25 . 26) (semantic-list 3 . 24) (punctuation 2 . 3) (punctuation 1 . 2))))
+  :file "!home!yarson!Coding!markdowner!src!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")
