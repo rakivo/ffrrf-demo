@@ -1,1 +1,0 @@
-("~/Coding/leetcode/" "~/Coding/htmlser/" "~/Coding/markdowner/" "~/Coding/macros/" "~/Coding/create/" "~/.emacs.d/" "~/Coding/hpybd/" "~/Coding/show/" "~/Downloads/Telegram Desktop/" "~/Coding/rorum/" "~/Coding/leetcode/c/" "~/Coding/leetcode/rs2/" "~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/" "~/Coding/leetcode/rs/" "~/Coding/getw/")
