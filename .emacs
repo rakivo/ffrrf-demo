@@ -4,7 +4,15 @@
 (package-initialize)
 
 (setq x-super-keysym 'meta)         
-(setq x-alt-keysym 'capslock)       
+(setq x-alt-keysym 'capslock)
+
+(global-set-key (kbd "C-S-h") 'windswap-left)
+(global-set-key (kbd "C-S-j") 'windswap-down)
+(global-set-key (kbd "C-S-k") 'windswap-up)
+(global-set-key (kbd "C-S-l") 'windswap-right)
+
+(global-set-key (kbd "M-j") 'move-text-down)
+(global-set-key (kbd "M-k") 'move-text-up)
 
 (defun insert-line-below ()
   "Insert an empty line below the current line."
@@ -19,8 +27,6 @@
   (save-excursion
     (end-of-line 0)
     (open-line 1)))
-
-(set-input-method 'english-dvorak)
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
@@ -37,11 +43,11 @@
 (load "~/.emacs.rc/org-mode-rc.el")
 (load "~/.emacs.rc/autocommit-rc.el")
 
-;(unless (package-installed-p 'evil)
-;  (package-install 'evil))
+(unless (package-installed-p 'evil)
+  (package-install 'evil))
 
-;(require 'evil)
-;(evil-mode 1)
+(require 'evil)
+(evil-mode 1)
 
 ;;; Appearance
 (defun rc/get-default-font ()
@@ -174,6 +180,14 @@
 
 (setq magit-auto-revert-mode nil)
 
+(require 'emms-setup)
+(emms-all)
+
+;; Use mpv as the player
+(setq emms-player-mpv-command-name "mpv")
+(add-to-list 'emms-player-list 'emms-player-mpv)
+(setq emms-player-list '(emms-player-mpv))
+
 (global-set-key (kbd "C-c m s") 'magit-status)
 (global-set-key (kbd "C-c m l") 'magit-log)
 
@@ -277,7 +291,7 @@
 ;;; Ebisp
 (add-to-list 'auto-mode-alist '("\\.ebi\\'" . lisp-mode))
 
-;(evil-define-key 'normal c-mode-map (kbd "C-]") 'lsp-find-definition)
+(evil-define-key 'normal c-mode-map (kbd "C-]") 'lsp-find-definition)
 
 (require 'lsp-mode)                                                 
 (require 'lsp-ui)                                                   
@@ -299,7 +313,7 @@
 ;;  (company-select-previous arg))                                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;(define-key evil-normal-state-map (kbd "C-.") 'my-company-select-previous)
+(define-key evil-normal-state-map (kbd "C-.") 'my-company-select-previous)
 (electric-pair-mode 1)
 
 (use-package cedet
@@ -338,19 +352,19 @@
   (ansi-color-apply-on-region compilation-filter-start (point-max)))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
-;(require 'evil)
-;(define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-;(define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
-;(define-key evil-insert-state-map (kbd "C-u")
-;  (lambda ()
-;    (interactive)
-;    (evil-delete (point-at-bol) (point))))
+(require 'evil)
+(define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+(define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
+(define-key evil-insert-state-map (kbd "C-u")
+  (lambda ()
+    (interactive)
+    (evil-delete (point-at-bol) (point))))
 (define-key company-active-map (kbd "<tab>") 'company-complete-common-or-cycle)
 (define-key company-active-map (kbd "S-<tab>") 'company-select-previous)
 (setq-default buffer-display-table (make-display-table))
 (global-set-key (kbd "C-x 3") 'split-window-right)
 
-;(define-key evil-normal-state-map (kbd "C-.") 'evil-repeat)
+(define-key evil-normal-state-map (kbd "C-.") 'evil-repeat)
 
 (add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c-mode))
@@ -367,21 +381,20 @@
             (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode 'rust-mode)
               (ggtags-mode 1))))
 
-;(evil-global-set-key 'normal (kbd "C-]") 'grep-find)
+; (evil-global-set-key 'normal (kbd "C-]") 'grep-find)
 
-;(evil-define-key 'normal 'grep-find-mode-map
-;  (kbd "C-h") 'evil-window-left
-;  (kbd "C-j") 'evil-window-down
-;  (kbd "C-k") 'evil-window-up
-;  (kbd "C-l") 'evil-window-right)
-;
-;(evil-define-key 'visual evil-normal-state-map (kbd "C-/") 'comment-uncomment-region)
-;
-;(evil-define-key 'normal 'compilation-mode-map
-;  (kbd "C-h") 'evil-window-left
-;  (kbd "C-j") 'evil-window-down
-;  (kbd "C-k") 'evil-window-up
-;  (kbd "C-l") 'evil-window-right)
+(define-key global-map (kbd "C-h") #'evil-window-left)
+(define-key global-map (kbd "C-j") #'evil-window-down)
+(define-key global-map (kbd "C-k") #'evil-window-up)
+(define-key global-map (kbd "C-l") #'evil-window-right)
+
+(evil-define-key 'visual evil-normal-state-map (kbd "C-/") 'comment-uncomment-region)
+
+(evil-define-key 'normal 'compilation-mode-map
+  (kbd "C-h") 'evil-window-left
+  (kbd "C-j") 'evil-window-down
+  (kbd "C-k") 'evil-window-up
+  (kbd "C-l") 'evil-window-right)
 
 ;;; Packages that don't require configuration
 (rc/require
@@ -451,7 +464,7 @@
 (global-set-key (kbd "C-c p") 'projectile-command-map)
 (global-set-key (kbd "C-c p b") 'projectile-switch-to-buffer)
 
-;(evil-set-undo-system 'undo-redo)
+(evil-set-undo-system 'undo-redo)
 
 (require 'compile)
 
@@ -477,7 +490,7 @@ compilation-error-regexp-alist-alist
    '(org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-irc org-mhe org-rmail org-w3m))
  '(org-refile-use-outline-path 'file)
  '(package-selected-packages
-   '(ggtags parinfer-rust-mode magit-gitflow projectile ivy ryo-modal lsp-ui lsp-mode rainbow-mode proof-general elpy hindent ag qml-mode racket-mode php-mode go-mode kotlin-mode nginx-mode toml-mode dockerfile-mode nix-mode purescript-mode markdown-mode jinja2-mode nim-mode csharp-mode rust-mode cmake-mode clojure-mode graphviz-dot-mode lua-mode tuareg glsl-mode yaml-mode d-mode scala-mode move-text nasm-mode editorconfig tide company powershell js2-mode yasnippet multiple-cursors magit haskell-mode paredit ido-completing-read+ smex gruber-darker-theme org-cliplink dash-functional dash))
+   '(windswap emms vterm ggtags parinfer-rust-mode magit-gitflow projectile ivy ryo-modal lsp-ui lsp-mode rainbow-mode proof-general elpy hindent ag qml-mode racket-mode php-mode go-mode kotlin-mode nginx-mode toml-mode dockerfile-mode nix-mode purescript-mode markdown-mode jinja2-mode nim-mode csharp-mode rust-mode cmake-mode clojure-mode graphviz-dot-mode lua-mode tuareg glsl-mode yaml-mode d-mode scala-mode move-text nasm-mode editorconfig tide company powershell js2-mode yasnippet multiple-cursors magit haskell-mode paredit ido-completing-read+ smex gruber-darker-theme org-cliplink dash-functional dash))
  '(safe-local-variable-values
    '((eval progn
            (auto-revert-mode 1)

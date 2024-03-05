@@ -3,6 +3,14 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        evil-backward-word-begin
+        evil-force-normal-state
+        evil-forward-char
+        evil-forward-word-end
+        evil-insert
+        evil-normal-state
+        evil-visual-char
+        evil-yank
         keyboard-escape-quit
         mark-word
         shell-command
@@ -11,4 +19,7 @@
 
 (setq mc/cmds-to-run-once
       '(
+        evil-backward-char
+        evil-previous-line
+        evil-search-next
         ))
