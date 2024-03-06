@@ -21,6 +21,10 @@
 (global-set-key (kbd "C-x h") 'previous-buffer)
 (global-set-key (kbd "C-x l") 'next-buffer)
 
+(global-set-key (kbd "C-0") 'shrink-window-horizontally)
+(global-set-key (kbd "C--") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-=") 'enlarge-window)
+
 (global-set-key (kbd "M-j") 'move-text-down)
 (global-set-key (kbd "M-k") 'move-text-up)
 

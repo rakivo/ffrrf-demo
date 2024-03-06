@@ -10,6 +10,7 @@
         evil-insert
         evil-normal-state
         evil-visual-char
+        evil-window-up
         evil-yank
         keyboard-escape-quit
         mark-word
@@ -19,7 +20,11 @@
 
 (setq mc/cmds-to-run-once
       '(
+        compile
         evil-backward-char
+        evil-delete
         evil-previous-line
         evil-search-next
+        evil-window-up
+        smex
         ))
