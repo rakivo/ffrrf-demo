@@ -6,10 +6,18 @@
 (setq x-super-keysym 'meta)         
 (setq x-alt-keysym 'capslock)
 
+(with-eval-after-load 'evil
+    (defalias #'forward-evil-word #'forward-evil-symbol)
+    ;; make evil-search-word look for symbol rather than word boundaries
+    (setq-default evil-symbol-word-search t))
+
 (global-set-key (kbd "C-S-h") 'windswap-left)
 (global-set-key (kbd "C-S-j") 'windswap-down)
 (global-set-key (kbd "C-S-k") 'windswap-up)
 (global-set-key (kbd "C-S-l") 'windswap-right)
+
+(global-set-key (kbd "C-x h") 'previous-buffer)
+(global-set-key (kbd "C-x l") 'next-buffer)
 
 (global-set-key (kbd "M-j") 'move-text-down)
 (global-set-key (kbd "M-k") 'move-text-up)
@@ -295,8 +303,39 @@
 
 (require 'lsp-mode)                                                 
 (require 'lsp-ui)                                                   
-;(add-hook 'rust-mode-hook #'lsp)                                    
-;(setq lsp-rust-server 'rust-analyzer)                               
+
+(setq lsp-ui-doc-enable nil
+      lsp-ui-sideline-enable nil)
+
+(setq lsp-eldoc-render-all nil)
+(setq lsp-enable-symbol-highlighting nil)
+(setq lsp-eldoc-render-all nil)
+(setq lsp-signature-render-documentation nil)
+
+(setq lsp-ui-doc-show-with-cursor nil)
+(setq lsp-lens-enable nil)
+(setq lsp-ui-sideline-show-code-actions nil)
+(setq lsp-ui-sideline-enable nil)
+(setq lsp-ui-sideline-show-hover nil)
+(setq lsp-modeline-code-actions-enable nil)
+(setq lsp-diagnostics-provider :none)
+(setq lsp-ui-sideline-enable nil)
+(setq lsp-modeline-diagnostics-enable nil)
+(setq lsp-eldoc-enable-hover nil)
+(setq lsp-headerline-breadcrumb-enable nil)
+(setq lsp-ui-sideline-enable nil)
+
+(setq lsp-ui-sideline-show-hover nil)
+(setq lsp-ui-sideline-show-code-actions nil) 
+(setq lsp-ui-imenu-enable nil) 
+(setq lsp-ui-flycheck-enable nil) 
+(setq lsp-ui-peek-enable nil) 
+(setq lsp-ui-scratch-enable nil) 
+(setq lsp-signature-auto-activate nil)
+
+;(add-hook 'rust-mode-hook 'eglot-ensure)                                    
+(global-eldoc-mode -1)
+(add-hook 'rust-mode-hook #'lsp)
                                                                     
 (require 'company)                                                  
 (add-hook 'rust-mode-hook 'company-mode)                            
@@ -481,23 +520,25 @@ compilation-error-regexp-alist-alist
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+    '("e27c9668d7eddf75373fa6b07475ae2d6892185f07ebed037eedf783318761d7" default))
  '(display-line-numbers-type 'relative)
  '(org-agenda-dim-blocked-tasks nil)
  '(org-agenda-exporter-settings '((org-agenda-tag-filter-preset (list "+personal"))))
  '(org-cliplink-transport-implementation 'url-el)
  '(org-enforce-todo-dependencies nil)
  '(org-modules
-   '(org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-irc org-mhe org-rmail org-w3m))
+    '(org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-irc org-mhe org-rmail org-w3m))
  '(org-refile-use-outline-path 'file)
  '(package-selected-packages
-   '(windswap emms vterm ggtags parinfer-rust-mode magit-gitflow projectile ivy ryo-modal lsp-ui lsp-mode rainbow-mode proof-general elpy hindent ag qml-mode racket-mode php-mode go-mode kotlin-mode nginx-mode toml-mode dockerfile-mode nix-mode purescript-mode markdown-mode jinja2-mode nim-mode csharp-mode rust-mode cmake-mode clojure-mode graphviz-dot-mode lua-mode tuareg glsl-mode yaml-mode d-mode scala-mode move-text nasm-mode editorconfig tide company powershell js2-mode yasnippet multiple-cursors magit haskell-mode paredit ido-completing-read+ smex gruber-darker-theme org-cliplink dash-functional dash))
+    '(windswap emms vterm ggtags parinfer-rust-mode magit-gitflow projectile ivy ryo-modal lsp-ui lsp-mode rainbow-mode proof-general elpy hindent ag qml-mode racket-mode php-mode go-mode kotlin-mode nginx-mode toml-mode dockerfile-mode nix-mode purescript-mode markdown-mode jinja2-mode nim-mode csharp-mode rust-mode cmake-mode clojure-mode graphviz-dot-mode lua-mode tuareg glsl-mode yaml-mode d-mode scala-mode move-text nasm-mode editorconfig tide company powershell js2-mode yasnippet multiple-cursors magit haskell-mode paredit ido-completing-read+ smex gruber-darker-theme org-cliplink dash-functional dash))
  '(safe-local-variable-values
-   '((eval progn
-           (auto-revert-mode 1)
-           (rc/autopull-changes)
-           (add-hook 'after-save-hook 'rc/autocommit-changes nil 'make-it-local))))
+    '((eval progn
+            (auto-revert-mode 1)
+            (rc/autopull-changes)
+            (add-hook 'after-save-hook 'rc/autocommit-changes nil 'make-it-local))))
  '(whitespace-style
-   '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark)))
+    '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
