@@ -3,7 +3,9 @@
              '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
-(setq x-super-keysym 'meta)         
+(pixel-scroll-precision-mode 1)
+
+(setq x-super-keysym 'meta)
 (setq x-alt-keysym 'capslock)
 
 (with-eval-after-load 'evil
@@ -335,22 +337,17 @@
 
 ;(add-hook 'rust-mode-hook 'eglot-ensure)                                    
 (global-eldoc-mode -1)
+
 (add-hook 'rust-mode-hook #'lsp)
+(add-hook 'c-mode-hook 'lsp)
+(add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c-mode))
+(add-hook 'c++-mode-hook 'lsp)
+(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
                                                                     
 (require 'company)                                                  
 (add-hook 'rust-mode-hook 'company-mode)                            
-; (setq company-tooltip-align-annotations t)                        
-;;                                                                     ;;
-;; (add-hook 'rust-mode-hook                                           ;;
-;;  (lambda ()                                                         ;;
-;;    (local-set-key (kbd "<tab>") 'company-indent-or-complete-common) ;;
-;;    (local-set-key (kbd "S-<tab>") 'company-select-previous)         ;;
-;;    ))                                                               ;;
-;; ;                                                                   ;;
-;; (defun my-company-select-previous (&optional arg)                   ;;
-;;  (interactive "p")                                                  ;;
-;;  (company-select-previous arg))                                     ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-key evil-normal-state-map (kbd "C-.") 'my-company-select-previous)
 (electric-pair-mode 1)
@@ -407,6 +404,12 @@
 
 (add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c-mode))
+
+(add-hook 'c-mode-hook
+          (lambda ()
+            (when (or (string-suffix-p ".c" buffer-file-name)
+                      (string-suffix-p ".h" buffer-file-name))
+              (c-set-style "stroustrup"))))
 
 (add-hook 'c-mode-common-hook
           (lambda ()
@@ -521,7 +524,7 @@ compilation-error-regexp-alist-alist
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-    '("e27c9668d7eddf75373fa6b07475ae2d6892185f07ebed037eedf783318761d7" default))
+    '("b273cc6a1d492660fff886a3cae1f00d5fd2d53b55fb374a21a14afd74fdec92" "f366d4bc6d14dcac2963d45df51956b2409a15b770ec2f6d730e73ce0ca5c8a7" "d19f00fe59f122656f096abbc97f5ba70d489ff731d9fa9437bac2622aaa8b89" "e27c9668d7eddf75373fa6b07475ae2d6892185f07ebed037eedf783318761d7" default))
  '(display-line-numbers-type 'relative)
  '(org-agenda-dim-blocked-tasks nil)
  '(org-agenda-exporter-settings '((org-agenda-tag-filter-preset (list "+personal"))))
@@ -531,7 +534,7 @@ compilation-error-regexp-alist-alist
     '(org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-irc org-mhe org-rmail org-w3m))
  '(org-refile-use-outline-path 'file)
  '(package-selected-packages
-    '(windswap emms vterm ggtags parinfer-rust-mode magit-gitflow projectile ivy ryo-modal lsp-ui lsp-mode rainbow-mode proof-general elpy hindent ag qml-mode racket-mode php-mode go-mode kotlin-mode nginx-mode toml-mode dockerfile-mode nix-mode purescript-mode markdown-mode jinja2-mode nim-mode csharp-mode rust-mode cmake-mode clojure-mode graphviz-dot-mode lua-mode tuareg glsl-mode yaml-mode d-mode scala-mode move-text nasm-mode editorconfig tide company powershell js2-mode yasnippet multiple-cursors magit haskell-mode paredit ido-completing-read+ smex gruber-darker-theme org-cliplink dash-functional dash))
+    '(anti-zenburn-theme dream-theme hc-zenburn-theme zenburn-theme windswap emms vterm ggtags parinfer-rust-mode magit-gitflow projectile ivy ryo-modal lsp-ui lsp-mode rainbow-mode proof-general elpy hindent ag qml-mode racket-mode php-mode go-mode kotlin-mode nginx-mode toml-mode dockerfile-mode nix-mode purescript-mode markdown-mode jinja2-mode nim-mode csharp-mode rust-mode cmake-mode clojure-mode graphviz-dot-mode lua-mode tuareg glsl-mode yaml-mode d-mode scala-mode move-text nasm-mode editorconfig tide company powershell js2-mode yasnippet multiple-cursors magit haskell-mode paredit ido-completing-read+ smex gruber-darker-theme org-cliplink dash-functional dash))
  '(safe-local-variable-values
     '((eval progn
             (auto-revert-mode 1)
