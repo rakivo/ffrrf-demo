@@ -8,10 +8,12 @@
         evil-forward-char
         evil-forward-word-end
         evil-insert
+        evil-insert-line
         evil-normal-state
         evil-visual-char
         evil-window-up
         evil-yank
+        indent-for-tab-command
         keyboard-escape-quit
         mark-word
         shell-command
@@ -23,6 +25,7 @@
         compile
         evil-backward-char
         evil-delete
+        evil-delete-backward-char-and-join
         evil-previous-line
         evil-search-next
         evil-window-up

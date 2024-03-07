@@ -8,6 +8,9 @@
 (setq x-super-keysym 'meta)
 (setq x-alt-keysym 'capslock)
 
+(require 'evil)
+(evil-mode 1)
+
 (with-eval-after-load 'evil
     (defalias #'forward-evil-word #'forward-evil-symbol)
     ;; make evil-search-word look for symbol rather than word boundaries
@@ -19,6 +22,8 @@
 (define-key evil-insert-state-map (kbd "C-l") 'right-char)
 (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
 (define-key evil-insert-state-map (kbd "C-a") 'move-beginning-of-line)
+
+(require 'windswap)
 
 (global-set-key (kbd "C-S-h") 'windswap-left)
 (global-set-key (kbd "C-S-j") 'windswap-down)
@@ -34,6 +39,8 @@
 
 (global-set-key (kbd "M-j") 'move-text-down)
 (global-set-key (kbd "M-k") 'move-text-up)
+
+(global-set-key (kbd "M-a") 'async-shell-command)
 
 (defun insert-line-below ()
   "Insert an empty line below the current line."
@@ -66,9 +73,6 @@
 
 (unless (package-installed-p 'evil)
   (package-install 'evil))
-
-(require 'evil)
-(evil-mode 1)
 
 ;;; Appearance
 (defun rc/get-default-font ()
