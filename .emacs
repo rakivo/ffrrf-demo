@@ -13,6 +13,13 @@
     ;; make evil-search-word look for symbol rather than word boundaries
     (setq-default evil-symbol-word-search t))
 
+(define-key evil-insert-state-map (kbd "C-h") 'left-char)
+(define-key evil-insert-state-map (kbd "C-j") 'next-line)
+(define-key evil-insert-state-map (kbd "C-k") 'previous-line)
+(define-key evil-insert-state-map (kbd "C-l") 'right-char)
+(define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
+(define-key evil-insert-state-map (kbd "C-a") 'move-beginning-of-line)
+
 (global-set-key (kbd "C-S-h") 'windswap-left)
 (global-set-key (kbd "C-S-j") 'windswap-down)
 (global-set-key (kbd "C-S-k") 'windswap-up)
