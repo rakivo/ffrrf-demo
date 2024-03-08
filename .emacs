@@ -22,6 +22,7 @@
 (define-key evil-insert-state-map (kbd "C-l") 'right-char)
 (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
 (define-key evil-insert-state-map (kbd "C-a") 'move-beginning-of-line)
+(define-key evil-insert-state-map (kbd "C-y") 'yank)
 
 (require 'windswap)
 
@@ -30,8 +31,10 @@
 (global-set-key (kbd "C-S-k") 'windswap-up)
 (global-set-key (kbd "C-S-l") 'windswap-right)
 
-(global-set-key (kbd "C-x h") 'previous-buffer)
-(global-set-key (kbd "C-x l") 'next-buffer)
+(global-set-key (kbd "C-x C-h") 'previous-buffer)
+(global-set-key (kbd "C-x C-l") 'next-buffer)
+
+(global-set-key (kbd "M-i") 'mark-sexp)
 
 (global-set-key (kbd "C-0") 'shrink-window-horizontally)
 (global-set-key (kbd "C--") 'enlarge-window-horizontally)
