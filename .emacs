@@ -23,6 +23,8 @@
 (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
 (define-key evil-insert-state-map (kbd "C-a") 'move-beginning-of-line)
 (define-key evil-insert-state-map (kbd "C-y") 'yank)
+(define-key evil-insert-state-map (kbd "C-w") 'forward-word)
+(define-key evil-insert-state-map (kbd "C-b") 'backward-word)
 
 (require 'windswap)
 
