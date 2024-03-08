@@ -8,13 +8,19 @@
 (setq x-super-keysym 'meta)
 (setq x-alt-keysym 'capslock)
 
-(require 'evil)
 (evil-mode 1)
 
+(defun set-rectangle-cursor ()
+  (setq cursor-type 'box))
+
+(add-hook 'evil-normal-state-entry-hook 'set-rectangle-cursor)
+(add-hook 'evil-insert-state-entry-hook 'set-rectangle-cursor)
+(add-hook 'evil-visual-state-entry-hook 'set-rectangle-cursor)
+
 (with-eval-after-load 'evil
-    (defalias #'forward-evil-word #'forward-evil-symbol)
-    ;; make evil-search-word look for symbol rather than word boundaries
-    (setq-default evil-symbol-word-search t))
+  (defalias #'forward-evil-word #'forward-evil-symbol)
+        ;; make evil-search-word look for symbol rather than word boundaries
+  (setq-default evil-symbol-word-search t))
 
 (define-key evil-insert-state-map (kbd "C-h") 'left-char)
 (define-key evil-insert-state-map (kbd "C-j") 'next-line)
@@ -408,7 +414,6 @@
   (ansi-color-apply-on-region compilation-filter-start (point-max)))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
-(require 'evil)
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
 (define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
 (define-key evil-insert-state-map (kbd "C-u")
