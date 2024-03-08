@@ -45,9 +45,11 @@
 (define-key global-map (kbd "C-k") #'evil-window-up)
 (define-key global-map (kbd "C-l") #'evil-window-right)
 
-(rc/require 'move-text)
-(global-set-key (kbd "M-p") 'move-text-up)
+(require 'move-text)
 (global-set-key (kbd "M-n") 'move-text-down)
+(global-set-key (kbd "M-p") 'move-text-up)
+(global-set-key (kbd "M-j") 'move-text-down)
+(global-set-key (kbd "M-k") 'move-text-up)
 
 (evil-define-key 'visual evil-normal-state-map (kbd "C-/") 'comment-uncomment-region)
 
@@ -56,6 +58,8 @@
   (kbd "C-j") 'evil-window-down
   (kbd "C-k") 'evil-window-up
   (kbd "C-l") 'evil-window-right)
+
+(global-set-key (kbd "M-r") 'recompile)
 
 (require 'windswap)
 
@@ -72,9 +76,6 @@
 (global-set-key (kbd "C-0") 'shrink-window-horizontally)
 (global-set-key (kbd "C--") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-=") 'enlarge-window)
-
-(global-set-key (kbd "M-j") 'move-text-down)
-(global-set-key (kbd "M-k") 'move-text-up)
 
 (global-set-key (kbd "M-a") 'async-shell-command)
 
@@ -141,7 +142,7 @@
 (ido-ubiquitous-mode 1)
 
 (global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+; (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;;; c-mode
 (setq-default c-basic-offset 4
@@ -353,6 +354,7 @@
 (require 'lsp-ui)                                                   
 ;     UNCOMMENT IF WANT TO TURN OFF AUTOCOMPLETION HINTS 
 ; (setq lsp-completion-enable nil)
+(setq lsp-completion-enable 1)
 
 (setq lsp-ui-doc-enable nil
       lsp-ui-sideline-enable nil)
