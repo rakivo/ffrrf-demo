@@ -8,10 +8,18 @@
 (setq x-super-keysym 'meta)
 (setq x-alt-keysym 'capslock)
 
+(require 'evil)
 (evil-mode 1)
+
+(setq haskell-interactive-popup-errors nil)
 
 (defun set-rectangle-cursor ()
   (setq cursor-type 'box))
+
+(global-set-key (kbd "TAB") (lambda () (interactive) (insert "    ")))
+
+(set-default 'cursor-type 'box)
+(setq evil-insert-state-cursor 'box)
 
 (add-hook 'evil-normal-state-entry-hook 'set-rectangle-cursor)
 (add-hook 'evil-insert-state-entry-hook 'set-rectangle-cursor)
@@ -32,6 +40,23 @@
 (define-key evil-insert-state-map (kbd "C-w") 'forward-word)
 (define-key evil-insert-state-map (kbd "C-b") 'backward-word)
 
+(define-key global-map (kbd "C-h") #'evil-window-left)
+(define-key global-map (kbd "C-j") #'evil-window-down)
+(define-key global-map (kbd "C-k") #'evil-window-up)
+(define-key global-map (kbd "C-l") #'evil-window-right)
+
+(rc/require 'move-text)
+(global-set-key (kbd "M-p") 'move-text-up)
+(global-set-key (kbd "M-n") 'move-text-down)
+
+(evil-define-key 'visual evil-normal-state-map (kbd "C-/") 'comment-uncomment-region)
+
+(evil-define-key 'normal 'compilation-mode-map
+  (kbd "C-h") 'evil-window-left
+  (kbd "C-j") 'evil-window-down
+  (kbd "C-k") 'evil-window-up
+  (kbd "C-l") 'evil-window-right)
+
 (require 'windswap)
 
 (global-set-key (kbd "C-S-h") 'windswap-left)
@@ -42,7 +67,7 @@
 (global-set-key (kbd "C-x C-h") 'previous-buffer)
 (global-set-key (kbd "C-x C-l") 'next-buffer)
 
-(global-set-key (kbd "M-i") 'mark-sexp)
+; (global-set-key (kbd "M-i") 'mark-sexp)
 
 (global-set-key (kbd "C-0") 'shrink-window-horizontally)
 (global-set-key (kbd "C--") 'enlarge-window-horizontally)
@@ -175,8 +200,8 @@
 
 (require 'jai-mode)
 
-(require 'simpc-mode)
-(add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
+; (require 'simpc-mode)
+; (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
 
 ;;; Whitespace mode
 (defun rc/set-up-whitespace-handling ()
@@ -319,11 +344,6 @@
 
 (setq font-latex-fontify-sectioning 'color)
 
-;;; Move Text
-(rc/require 'move-text)
-(global-set-key (kbd "M-p") 'move-text-up)
-(global-set-key (kbd "M-n") 'move-text-down)
-
 ;;; Ebisp
 (add-to-list 'auto-mode-alist '("\\.ebi\\'" . lisp-mode))
 
@@ -331,6 +351,8 @@
 
 (require 'lsp-mode)                                                 
 (require 'lsp-ui)                                                   
+;     UNCOMMENT IF WANT TO TURN OFF AUTOCOMPLETION HINTS 
+; (setq lsp-completion-enable nil)
 
 (setq lsp-ui-doc-enable nil
       lsp-ui-sideline-enable nil)
@@ -364,7 +386,7 @@
 ;(add-hook 'rust-mode-hook 'eglot-ensure)                                    
 (global-eldoc-mode -1)
 
-(add-hook 'rust-mode-hook #'lsp)
+(add-hook 'rust-mode-hook 'lsp)
 (add-hook 'c-mode-hook 'lsp)
 (add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c-mode))
@@ -374,7 +396,6 @@
                                                                     
 (require 'company)                                                  
 (add-hook 'rust-mode-hook 'company-mode)                            
-
 (define-key evil-normal-state-map (kbd "C-.") 'my-company-select-previous)
 (electric-pair-mode 1)
 
@@ -400,8 +421,6 @@
 
 (global-set-key (kbd "C-c , d") #'semantic-display-tag)
 (easy-menu-add-item cedet-menu-map '("Navigate Tags") ["Display Tag" semantic-display-tag (semantic-active-p)] 'semantic-complete-jump-local)
-
-(global-set-key (kbd "C-/") 'comment-or-uncomment-region)
 
 (setq electric-pair-pairs '(
                             (?\" . ?\")
@@ -447,21 +466,6 @@
           (lambda ()
             (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode 'rust-mode)
               (ggtags-mode 1))))
-
-; (evil-global-set-key 'normal (kbd "C-]") 'grep-find)
-
-(define-key global-map (kbd "C-h") #'evil-window-left)
-(define-key global-map (kbd "C-j") #'evil-window-down)
-(define-key global-map (kbd "C-k") #'evil-window-up)
-(define-key global-map (kbd "C-l") #'evil-window-right)
-
-(evil-define-key 'visual evil-normal-state-map (kbd "C-/") 'comment-uncomment-region)
-
-(evil-define-key 'normal 'compilation-mode-map
-  (kbd "C-h") 'evil-window-left
-  (kbd "C-j") 'evil-window-down
-  (kbd "C-k") 'evil-window-up
-  (kbd "C-l") 'evil-window-right)
 
 ;;; Packages that don't require configuration
 (rc/require
