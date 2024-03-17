@@ -10,11 +10,13 @@
         evil-insert
         evil-insert-line
         evil-normal-state
+        evil-undo
         evil-visual-char
         evil-window-up
         evil-yank
         indent-for-tab-command
         keyboard-escape-quit
+        kill-region
         mark-word
         shell-command
         toggle-input-method
@@ -23,11 +25,14 @@
 (setq mc/cmds-to-run-once
       '(
         compile
+        enlarge-window
         evil-backward-char
         evil-delete
         evil-delete-backward-char-and-join
         evil-previous-line
         evil-search-next
+        evil-window-down
+        evil-window-next
         evil-window-up
         smex
         ))

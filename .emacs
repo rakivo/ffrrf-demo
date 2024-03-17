@@ -37,13 +37,17 @@
 (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
 (define-key evil-insert-state-map (kbd "C-a") 'move-beginning-of-line)
 (define-key evil-insert-state-map (kbd "C-y") 'yank)
-(define-key evil-insert-state-map (kbd "C-w") 'forward-word)
+(define-key evil-insert-state-map (kbd "C-d") 'delete-char)
+(define-key evil-insert-state-map (kbd "C-w") 'kill-region)
+(define-key evil-insert-state-map (kbd "C-f") 'forward-word)
 (define-key evil-insert-state-map (kbd "C-b") 'backward-word)
 
 (define-key global-map (kbd "C-h") #'evil-window-left)
 (define-key global-map (kbd "C-j") #'evil-window-down)
 (define-key global-map (kbd "C-k") #'evil-window-up)
 (define-key global-map (kbd "C-l") #'evil-window-right)
+
+(define-key global-map (kbd "C-?") #'comment-or-uncomment-region)
 
 (require 'move-text)
 (global-set-key (kbd "M-n") 'move-text-down)
@@ -71,7 +75,7 @@
 (global-set-key (kbd "C-x C-h") 'previous-buffer)
 (global-set-key (kbd "C-x C-l") 'next-buffer)
 
-; (global-set-key (kbd "M-i") 'mark-sexp)
+(global-set-key (kbd "M-i") 'mark-sexp)
 
 (global-set-key (kbd "C-0") 'shrink-window-horizontally)
 (global-set-key (kbd "C--") 'enlarge-window-horizontally)
@@ -198,6 +202,8 @@
 (require 'porth-mode)
 
 (require 'noq-mode)
+
+(require 'zig-mode)
 
 (require 'jai-mode)
 
@@ -565,7 +571,7 @@ compilation-error-regexp-alist-alist
     '(org-bbdb org-bibtex org-docview org-gnus org-habit org-info org-irc org-mhe org-rmail org-w3m))
  '(org-refile-use-outline-path 'file)
  '(package-selected-packages
-    '(anti-zenburn-theme dream-theme hc-zenburn-theme zenburn-theme windswap emms vterm ggtags parinfer-rust-mode magit-gitflow projectile ivy ryo-modal lsp-ui lsp-mode rainbow-mode proof-general elpy hindent ag qml-mode racket-mode php-mode go-mode kotlin-mode nginx-mode toml-mode dockerfile-mode nix-mode purescript-mode markdown-mode jinja2-mode nim-mode csharp-mode rust-mode cmake-mode clojure-mode graphviz-dot-mode lua-mode tuareg glsl-mode yaml-mode d-mode scala-mode move-text nasm-mode editorconfig tide company powershell js2-mode yasnippet multiple-cursors magit haskell-mode paredit ido-completing-read+ smex gruber-darker-theme org-cliplink dash-functional dash))
+    '(zig-mode anti-zenburn-theme dream-theme hc-zenburn-theme zenburn-theme windswap emms vterm ggtags parinfer-rust-mode magit-gitflow projectile ivy ryo-modal lsp-ui lsp-mode rainbow-mode proof-general elpy hindent ag qml-mode racket-mode php-mode go-mode kotlin-mode nginx-mode toml-mode dockerfile-mode nix-mode purescript-mode markdown-mode jinja2-mode nim-mode csharp-mode rust-mode cmake-mode clojure-mode graphviz-dot-mode lua-mode tuareg glsl-mode yaml-mode d-mode scala-mode move-text nasm-mode editorconfig tide company powershell js2-mode yasnippet multiple-cursors magit haskell-mode paredit ido-completing-read+ smex gruber-darker-theme org-cliplink dash-functional dash))
  '(safe-local-variable-values
     '((eval progn
             (auto-revert-mode 1)
