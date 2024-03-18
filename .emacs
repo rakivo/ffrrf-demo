@@ -91,7 +91,6 @@
 
 (add-to-list 'load-path "~/.emacs.local/")
 (load "~/.emacs.rc/rc.el")
-(load "~/.emacs.rc/misc-rc.el")
 
 (unless (package-installed-p 'evil)
   (package-install 'evil))
