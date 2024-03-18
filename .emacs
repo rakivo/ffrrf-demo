@@ -11,6 +11,9 @@
 (require 'evil)
 (evil-mode 1)
 
+(global-display-line-numbers-mode)
+(setq display-line-numbers 'relative))
+
 (setq haskell-interactive-popup-errors nil)
 
 (defun set-rectangle-cursor ()
@@ -88,10 +91,12 @@
 
 (add-to-list 'load-path "~/.emacs.local/")
 (load "~/.emacs.rc/rc.el")
+(load "~/.emacs.rc/misc-rc.el")
 
 (unless (package-installed-p 'evil)
   (package-install 'evil))
 
+;;; Appearance
 (defun rc/get-default-font ()
   (cond
    ((eq system-type 'windows-nt) "Consolas-13")
@@ -122,6 +127,7 @@
 (ido-ubiquitous-mode 1)
 
 (global-set-key (kbd "M-x") 'smex)
+; (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 (add-hook 'c-mode-hook (lambda ()
                          (interactive)
@@ -363,3 +369,16 @@ compilation-error-regexp-alist-alist
 (add-to-list 'compilation-error-regexp-alist
              '("\\([a-zA-Z0-9\\.]+\\)(\\([0-9]+\\)\\(,\\([0-9]+\\)\\)?) \\(Warning:\\)?"
                1 2 (4) (5)))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+    '(linum-relative column-enforce-mode zig-mode zenburn-theme yaml-mode xterm-color windswap vterm typescript-mode tuareg toml-mode tide sml-mode smex smartparens scala-mode ryo-modal rust-mode rfc-mode rainbow-mode racket-mode qml-mode purescript-mode proof-general projectile powershell php-mode parinfer-rust-mode paredit org-cliplink nix-mode nim-mode nginx-mode nasm-mode multiple-cursors move-text magit-gitflow lua-mode lsp-ui kotlin-mode js2-mode jinja2-mode ido-completing-read+ hindent helm hc-zenburn-theme haskell-mode gruber-darker-theme graphviz-dot-mode go-mode glsl-mode ggtags evil emms elpy editorconfig dumb-jump dream-theme dockerfile-mode dash-functional d-mode counsel-etags cmake-mode clojure-mode anti-zenburn-theme ag)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
