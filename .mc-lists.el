@@ -10,6 +10,7 @@
         evil-insert
         evil-insert-line
         evil-normal-state
+        evil-scroll-line-up
         evil-undo
         evil-visual-char
         evil-window-up
