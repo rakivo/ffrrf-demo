@@ -93,8 +93,11 @@
 (global-set-key (kbd "C-S-p") 'windswap-up)
 (global-set-key (kbd "C-S-f") 'windswap-right)
 
-(global-set-key (kbd "C-x C-h") 'previous-buffer)
-(global-set-key (kbd "C-x C-l") 'next-buffer)
+;; (global-set-key (kbd "C-x C-h") 'previous-buffer)
+;; (global-set-key (kbd "C-x C-l") 'next-buffer)
+
+(global-set-key (kbd "C-x C-p") 'previous-buffer)
+(global-set-key (kbd "C-x C-n") 'next-buffer)
 
 (global-set-key (kbd "M-i") 'mark-sexp)
 
