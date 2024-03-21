@@ -8,15 +8,17 @@
 (setq x-super-keysym 'meta)
 (setq x-alt-keysym 'capslock)
 
-(use-package evil-surround
-  :ensure t
-  :config
-  (global-evil-surround-mode 1))
+;; (use-package evil-surround
+;;   :ensure t
+;;   :config
+;;   (global-evil-surround-mode 1))
 
-(require 'evil)
-(evil-mode 1)
+;; (require 'evil)
+;; (evil-mode 1)
 
-(global-display-line-numbers-mode)
+(use-package surround :ensure t)
+    
+(global-display-line-numbers-mode 1)
 (setq display-line-numbers 'relative)
 
 (setq haskell-interactive-popup-errors nil)
@@ -27,32 +29,37 @@
 (global-set-key (kbd "TAB") (lambda () (interactive) (insert "    ")))
 
 (set-default 'cursor-type 'box)
-(setq evil-insert-state-cursor 'box)
+;; (setq evil-insert-state-cursor 'box)
 
-(add-hook 'evil-normal-state-entry-hook 'set-rectangle-cursor)
-(add-hook 'evil-insert-state-entry-hook 'set-rectangle-cursor)
-(add-hook 'evil-visual-state-entry-hook 'set-rectangle-cursor)
+;; (add-hook 'evil-normal-state-entry-hook 'set-rectangle-cursor)
+;; (add-hook 'evil-insert-state-entry-hook 'set-rectangle-cursor)
+;; (add-hook 'evil-visual-state-entry-hook 'set-rectangle-cursor)
 
-(with-eval-after-load 'evil
-  (defalias #'forward-evil-word #'forward-evil-symbol)
-  (setq-default evil-symbol-word-search t))
+;; (with-eval-after-load 'evil
+;;   (defalias #'forward-evil-word #'forward-evil-symbol)
+;;   (setq-default evil-symbol-word-search t))
 
-(define-key evil-insert-state-map (kbd "C-h") 'left-char)
-(define-key evil-insert-state-map (kbd "C-j") 'next-line)
-(define-key evil-insert-state-map (kbd "C-k") 'previous-line)
-(define-key evil-insert-state-map (kbd "C-l") 'right-char)
-(define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
-(define-key evil-insert-state-map (kbd "C-a") 'move-beginning-of-line)
-(define-key evil-insert-state-map (kbd "C-y") 'yank)
-(define-key evil-insert-state-map (kbd "C-d") 'delete-char)
-(define-key evil-insert-state-map (kbd "C-w") 'kill-region)
-(define-key evil-insert-state-map (kbd "C-f") 'forward-word)
-(define-key evil-insert-state-map (kbd "C-b") 'backward-word)
+;; (define-key evil-insert-state-map (kbd "C-h") 'left-char)
+;; (define-key evil-insert-state-map (kbd "C-j") 'next-line)
+;; (define-key evil-insert-state-map (kbd "C-k") 'previous-line)
+;; (define-key evil-insert-state-map (kbd "C-l") 'right-char)
+;; (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
+;; (define-key evil-insert-state-map (kbd "C-a") 'move-beginning-of-line)
+;; (define-key evil-insert-state-map (kbd "C-y") 'yank)
+;; (define-key evil-insert-state-map (kbd "C-d") 'delete-char)
+;; (define-key evil-insert-state-map (kbd "C-w") 'kill-region)
+;; (define-key evil-insert-state-map (kbd "C-f") 'forward-word)
+;; (define-key evil-insert-state-map (kbd "C-b") 'backward-word)
 
-(define-key global-map (kbd "C-h") #'evil-window-left)
-(define-key global-map (kbd "C-j") #'evil-window-down)
-(define-key global-map (kbd "C-k") #'evil-window-up)
-(define-key global-map (kbd "C-l") #'evil-window-right)
+;; (define-key global-map (kbd "C-h") #'evil-window-left)
+;; (define-key global-map (kbd "C-j") #'evil-window-down)
+;; (define-key global-map (kbd "C-k") #'evil-window-up)
+;; (define-key global-map (kbd "C-l") #'evil-window-right)
+
+(define-key global-map (kbd "C-c b") #'windmove-left)
+(define-key global-map (kbd "C-c n") #'windmove-down)
+(define-key global-map (kbd "C-c p") #'windmove-up)
+(define-key global-map (kbd "C-c f") #'windmove-right)
 
 (define-key global-map (kbd "C-?") #'comment-or-uncomment-region)
 
@@ -64,22 +71,27 @@
 
 (global-set-key (kbd "M-e") 'grep-find)
 
-(evil-define-key 'visual evil-normal-state-map (kbd "C-/") 'comment-uncomment-region)
+;; (evil-define-key 'visual evil-normal-state-map (kbd "C-/") 'comment-uncomment-region)
 
-(evil-define-key 'normal 'compilation-mode-map
-  (kbd "C-h") 'evil-window-left
-  (kbd "C-j") 'evil-window-down
-  (kbd "C-k") 'evil-window-up
-  (kbd "C-l") 'evil-window-right)
+;; (evil-define-key 'normal 'compilation-mode-map
+;;   (kbd "C-h") 'evil-window-left
+;;   (kbd "C-j") 'evil-window-down
+;;   (kbd "C-k") 'evil-window-up
+;;   (kbd "C-l") 'evil-window-right)
 
 (global-set-key (kbd "M-r") 'recompile)
 
 (require 'windswap)
 
-(global-set-key (kbd "C-S-h") 'windswap-left)
-(global-set-key (kbd "C-S-j") 'windswap-down)
-(global-set-key (kbd "C-S-k") 'windswap-up)
-(global-set-key (kbd "C-S-l") 'windswap-right)
+;; (global-set-key (kbd "C-S-h") 'windswap-left)
+;; (global-set-key (kbd "C-S-j") 'windswap-down)
+;; (global-set-key (kbd "C-S-k") 'windswap-up)
+;; (global-set-key (kbd "C-S-l") 'windswap-right)
+
+(global-set-key (kbd "C-S-b") 'windswap-left)
+(global-set-key (kbd "C-S-n") 'windswap-down)
+(global-set-key (kbd "C-S-p") 'windswap-up)
+(global-set-key (kbd "C-S-f") 'windswap-right)
 
 (global-set-key (kbd "C-x C-h") 'previous-buffer)
 (global-set-key (kbd "C-x C-l") 'next-buffer)
@@ -98,9 +110,6 @@
 
 (add-to-list 'load-path "~/.emacs.local/")
 (load "~/.emacs.rc/rc.el")
-
-(unless (package-installed-p 'evil)
-  (package-install 'evil))
 
 ;;; Appearance
 (defun rc/get-default-font ()
@@ -217,13 +226,13 @@
             (interactive)
             (company-mode 0)))
 
-(evil-define-key 'normal c-mode-map (kbd "C-]") 'lsp-find-definition)
+;; (evil-define-key 'normal c-mode-map (kbd "C-]") 'lsp-find-definition)
 
 (require 'lsp-mode)                                                 
 (require 'lsp-ui)                                                   
 ;     UNCOMMENT IF WANT TO TURN OFF AUTOCOMPLETION HINTS 
-; (setq lsp-completion-enable nil)
-(setq lsp-completion-enable 1)
+(setq lsp-completion-enable nil)
+; (setq lsp-completion-enable 1)
 
 (setq lsp-ui-doc-enable nil
       lsp-ui-sideline-enable nil)
@@ -267,7 +276,7 @@
                                                                     
 (require 'company)                                                  
 (add-hook 'rust-mode-hook 'company-mode)                            
-(define-key evil-normal-state-map (kbd "C-.") 'my-company-select-previous)
+;; (define-key evil-normal-state-map (kbd "C-.") 'my-company-select-previous)
 (electric-pair-mode 1)
 
 (setq electric-pair-pairs '(
@@ -281,10 +290,10 @@
   (ansi-color-apply-on-region compilation-filter-start (point-max)))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
-(define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-(define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
+;; (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+;; (define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
 
-(define-key evil-normal-state-map (kbd "C-.") 'evil-repeat)
+;; (define-key evil-normal-state-map (kbd "C-.") 'evil-repeat)
 
 (add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c-mode))
@@ -366,7 +375,7 @@
   :config
   (ivy-mode +1))
 
-(evil-set-undo-system 'undo-redo)
+;; (evil-set-undo-system 'undo-redo)
 
 (require 'compile)
 
@@ -381,7 +390,7 @@ compilation-error-regexp-alist-alist
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-    '(evil-surround wrap-region linum-relative column-enforce-mode zig-mode zenburn-theme yaml-mode xterm-color windswap vterm typescript-mode tuareg toml-mode tide sml-mode smex smartparens scala-mode ryo-modal rust-mode rfc-mode rainbow-mode racket-mode qml-mode purescript-mode proof-general projectile powershell php-mode parinfer-rust-mode paredit org-cliplink nix-mode nim-mode nginx-mode nasm-mode multiple-cursors move-text magit-gitflow lua-mode lsp-ui kotlin-mode js2-mode jinja2-mode ido-completing-read+ hindent helm hc-zenburn-theme haskell-mode gruber-darker-theme graphviz-dot-mode go-mode glsl-mode ggtags evil emms elpy editorconfig dumb-jump dream-theme dockerfile-mode dash-functional d-mode counsel-etags cmake-mode clojure-mode anti-zenburn-theme ag)))
+    '(surround evil-surround wrap-region linum-relative column-enforce-mode zig-mode zenburn-theme yaml-mode xterm-color windswap vterm typescript-mode tuareg toml-mode tide sml-mode smex smartparens scala-mode ryo-modal rust-mode rfc-mode rainbow-mode racket-mode qml-mode purescript-mode proof-general projectile powershell php-mode parinfer-rust-mode paredit org-cliplink nix-mode nim-mode nginx-mode nasm-mode multiple-cursors move-text magit-gitflow lua-mode lsp-ui kotlin-mode js2-mode jinja2-mode ido-completing-read+ hindent helm hc-zenburn-theme haskell-mode gruber-darker-theme graphviz-dot-mode go-mode glsl-mode ggtags evil emms elpy editorconfig dumb-jump dream-theme dockerfile-mode dash-functional d-mode counsel-etags cmake-mode clojure-mode anti-zenburn-theme ag)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
