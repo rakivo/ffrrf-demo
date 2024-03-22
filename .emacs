@@ -49,7 +49,7 @@
   (move-beginning-of-line nil)
   (newline)
   (previous-line)
-  (insert-tab))
+)
 
 (defun insert-line-below-and-jump ()
   (interactive)
@@ -60,6 +60,8 @@
 (global-set-key (kbd "C-M-o") 'insert-line-above-and-jump)    
 (global-set-key (kbd "M-<return>") 'insert-line-above-and-jump)
 (global-set-key (kbd "C-<return>") 'insert-line-below-and-jump)
+(global-set-key (kbd "M-o") 'insert-line-above-and-jump)  
+(global-set-key (kbd "M-m") 'insert-line-below-and-jump)
 (global-set-key (kbd "C-c C-o") 'copy-line)
 (global-set-key (kbd "C-c C-m") 'duplicate-line)
 
