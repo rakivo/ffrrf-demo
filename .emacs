@@ -44,6 +44,21 @@
   (message "copied")
 )
 
+(defun insert-line-above-and-jump ()
+  (interactive)
+  (move-beginning-of-line nil)
+  (newline)
+  (previous-line)
+  (insert-tab))
+
+(defun insert-line-below-and-jump ()
+  (interactive)
+  (move-end-of-line nil)
+  (newline-and-indent)
+)
+  
+(global-set-key (kbd "C-M-o") 'insert-line-above-and-jump)     
+(global-set-key (kbd "C-<return>") 'insert-line-below-and-jump)
 (global-set-key (kbd "C-c C-o") 'copy-line)
 (global-set-key (kbd "C-c C-m") 'duplicate-line)
 
