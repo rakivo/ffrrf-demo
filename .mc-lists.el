@@ -36,5 +36,6 @@
         evil-window-down
         evil-window-next
         evil-window-up
+        pixel-scroll-precision
         smex
         ))

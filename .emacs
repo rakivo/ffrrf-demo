@@ -23,8 +23,6 @@
   (interactive)
   (mark-word -1))
     
-(global-set-key (kbd "M-#") 'my-combined-negative-argument)
-
 (defun duplicate-line()
   "Dup curr. line"    
   (interactive)
@@ -34,35 +32,38 @@
   (open-line 1)
   (next-line 1)
   (yank)
-  (message "duped!")
-)
+  (message "duped!"))
 
 (defun copy-line ()
   "Copy the current line."
   (interactive)
   (kill-ring-save (line-beginning-position) (line-end-position))
-  (message "copied")
-)
+  (message "copied"))
 
 (defun insert-line-above-and-jump ()
   (interactive)
   (move-beginning-of-line nil)
   (newline)
-  (previous-line)
-)
+  (previous-line))
+
+(defun select-line ()
+  "select."
+  (interactive)
+  (move-beginning-of-line nil)
+  (push-mark nil t t)
+  (move-end-of-line nil))
 
 (defun insert-line-below-and-jump ()
   (interactive)
   (move-end-of-line nil)
-  (newline-and-indent)
-)
-  
-(global-set-key (kbd "C-M-o") 'insert-line-above-and-jump)    
+  (newline-and-indent))
+
+(global-set-key (kbd "C-M-o") 'insert-line-above-and-jump)
 (global-set-key (kbd "M-<return>") 'insert-line-above-and-jump)
 (global-set-key (kbd "C-<return>") 'insert-line-below-and-jump)
 (global-set-key (kbd "M-o") 'insert-line-above-and-jump)  
 (global-set-key (kbd "M-m") 'insert-line-below-and-jump)
-(global-set-key (kbd "C-c C-o") 'copy-line)
+(global-set-key (kbd "C-c C-o") 'select-line)
 (global-set-key (kbd "C-c C-m") 'duplicate-line)
 
 (delete-selection-mode 1)
