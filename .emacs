@@ -9,8 +9,8 @@
 (setq x-alt-keysym 'capslock)
 
 ;; (use-package evil-surround
-;;   :ensure t
 ;;   :config
+;;   :ensure t
 ;;   (global-evil-surround-mode 1))
 
 ;; (require 'evil)
@@ -19,6 +19,18 @@
 (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
 
 (use-package surround :ensure t)
+
+(defun duplicate-line()
+    (interactive)
+    (move-beginning-of-line 1)
+    (kill-line)
+    (yank)
+    (open-line 1)
+    (next-line 1)
+    (yank)
+)
+
+(global-set-key (kbd "C-c C-p") 'duplicate-line)
     
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers 'relative)
@@ -165,8 +177,8 @@
 
 (require 'fasm-mode)
 (add-to-list 'auto-mode-alist '("\\.asm\\'" . fasm-mode))
-
 (require 'porth-mode)
+
 
 (require 'noq-mode)
 
