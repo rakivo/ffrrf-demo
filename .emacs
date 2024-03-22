@@ -45,8 +45,7 @@
 )
 
 (global-set-key (kbd "C-c C-o") 'copy-line)
-
-(global-set-key (kbd "C-c C-p") 'duplicate-line)
+(global-set-key (kbd "C-c C-m") 'duplicate-line)
 
 (delete-selection-mode 1)
 
