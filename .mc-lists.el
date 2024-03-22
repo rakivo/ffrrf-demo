@@ -19,6 +19,7 @@
         keyboard-escape-quit
         kill-region
         mark-word
+        paredit-delete-char
         shell-command
         toggle-input-method
         ))

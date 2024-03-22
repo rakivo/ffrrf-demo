@@ -16,22 +16,43 @@
 ;; (require 'evil)
 ;; (evil-mode 1)
 
-(add-hook 'emacs-lisp-mode-hook #'paredit-mode)
-
 (use-package surround :ensure t)
 
+(defun neg-mark-word ()
+  "Call negative argument and then M-@."
+  (interactive)
+  (mark-word -1))
+    
+(global-set-key (kbd "M-#") 'my-combined-negative-argument)
+
 (defun duplicate-line()
-    (interactive)
-    (move-beginning-of-line 1)
-    (kill-line)
-    (yank)
-    (open-line 1)
-    (next-line 1)
-    (yank)
+  "Dup curr. line"    
+  (interactive)
+  (move-beginning-of-line 1)
+  (kill-line)
+  (yank)
+  (open-line 1)
+  (next-line 1)
+  (yank)
+  (message "duped!")
 )
 
+(defun copy-line ()
+  "Copy the current line."
+  (interactive)
+  (kill-ring-save (line-beginning-position) (line-end-position))
+  (message "copied")
+)
+
+(global-set-key (kbd "C-c C-o") 'copy-line)
+
 (global-set-key (kbd "C-c C-p") 'duplicate-line)
-    
+
+(delete-selection-mode 1)
+
+(global-set-key (kbd "C-c C-k") 'kill-whole-line)
+(global-set-key (kbd "C-c C-<backspace>") 'kill-whole-line)
+   
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers 'relative)
 
@@ -70,18 +91,19 @@
 ;; (define-key global-map (kbd "C-k") #'evil-window-up)
 ;; (define-key global-map (kbd "C-l") #'evil-window-right)
 
-(define-key global-map (kbd "C-c b") #'windmove-left)
-(define-key global-map (kbd "C-c n") #'windmove-down)
-(define-key global-map (kbd "C-c p") #'windmove-up)
-(define-key global-map (kbd "C-c f") #'windmove-right)
+(define-key global-map (kbd "M-h") #'windmove-left)
+(define-key global-map (kbd "M-j") #'windmove-down)
+(define-key global-map (kbd "M-k") #'windmove-up)
+(define-key global-map (kbd "M-l") #'windmove-right)
 
 (define-key global-map (kbd "C-?") #'comment-or-uncomment-region)
 
 (require 'move-text)
 (global-set-key (kbd "M-n") 'move-text-down)
 (global-set-key (kbd "M-p") 'move-text-up)
-(global-set-key (kbd "M-j") 'move-text-down)
-(global-set-key (kbd "M-k") 'move-text-up)
+
+;; (global-set-key (kbd "M-j") 'move-text-down)
+;; (global-set-key (kbd "M-k") 'move-text-up)
 
 (global-set-key (kbd "M-e") 'grep-find)
 
@@ -110,8 +132,8 @@
 ;; (global-set-key (kbd "C-x C-h") 'previous-buffer)
 ;; (global-set-key (kbd "C-x C-l") 'next-buffer)
 
-(global-set-key (kbd "C-x C-p") 'previous-buffer)
-(global-set-key (kbd "C-x C-n") 'next-buffer)
+(global-set-key (kbd "C-c C-p") 'previous-buffer)
+(global-set-key (kbd "C-c C-n") 'next-buffer)
 
 (global-set-key (kbd "M-i") 'mark-sexp)
 
@@ -407,7 +429,7 @@ compilation-error-regexp-alist-alist
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(paredit-everywhere surround evil-surround wrap-region linum-relative column-enforce-mode zig-mode zenburn-theme yaml-mode xterm-color windswap vterm typescript-mode tuareg toml-mode tide sml-mode smex smartparens scala-mode ryo-modal rust-mode rfc-mode rainbow-mode racket-mode qml-mode purescript-mode proof-general projectile powershell php-mode parinfer-rust-mode paredit org-cliplink nix-mode nim-mode nginx-mode nasm-mode multiple-cursors move-text magit-gitflow lua-mode lsp-ui kotlin-mode js2-mode jinja2-mode ido-completing-read+ hindent helm hc-zenburn-theme haskell-mode gruber-darker-theme graphviz-dot-mode go-mode glsl-mode ggtags evil emms elpy editorconfig dumb-jump dream-theme dockerfile-mode dash-functional d-mode counsel-etags cmake-mode clojure-mode anti-zenburn-theme ag)))
+    '(surround evil-surround wrap-region linum-relative column-enforce-mode zig-mode zenburn-theme yaml-mode xterm-color windswap vterm typescript-mode tuareg toml-mode tide sml-mode smex smartparens scala-mode ryo-modal rust-mode rfc-mode rainbow-mode racket-mode qml-mode purescript-mode proof-general projectile powershell php-mode parinfer-rust-mode org-cliplink nix-mode nim-mode nginx-mode nasm-mode multiple-cursors move-text magit-gitflow lua-mode lsp-ui kotlin-mode js2-mode jinja2-mode ido-completing-read+ hindent helm hc-zenburn-theme haskell-mode gruber-darker-theme graphviz-dot-mode go-mode glsl-mode ggtags evil emms elpy editorconfig dumb-jump dream-theme dockerfile-mode dash-functional d-mode counsel-etags cmake-mode clojure-mode anti-zenburn-theme ag)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
