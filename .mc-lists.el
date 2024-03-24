@@ -38,4 +38,5 @@
         evil-window-up
         pixel-scroll-precision
         smex
+        text-scale-adjust
         ))

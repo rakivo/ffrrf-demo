@@ -62,7 +62,7 @@
 (global-set-key (kbd "M-<return>") 'insert-line-above-and-jump)
 (global-set-key (kbd "C-<return>") 'insert-line-below-and-jump)
 (global-set-key (kbd "M-o") 'insert-line-above-and-jump)  
-(global-set-key (kbd "M-m") 'insert-line-below-and-jump)
+;; (global-set-key (kbd "M-m") 'insert-line-below-and-jump)
 (global-set-key (kbd "C-c C-o") 'select-line)
 (global-set-key (kbd "C-c C-m") 'duplicate-line)
 
@@ -71,7 +71,7 @@
 (global-set-key (kbd "C-c C-k") 'kill-whole-line)
 (global-set-key (kbd "C-c C-<backspace>") 'kill-whole-line)
    
-(global-display-line-numbers-mode 1)
+(global-display-line-numbers-mode)
 (setq display-line-numbers 'relative)
 
 (setq haskell-interactive-popup-errors nil)
@@ -150,8 +150,10 @@
 ;; (global-set-key (kbd "C-x C-h") 'previous-buffer)
 ;; (global-set-key (kbd "C-x C-l") 'next-buffer)
 
-(global-set-key (kbd "C-c C-p") 'previous-buffer)
-(global-set-key (kbd "C-c C-n") 'next-buffer)
+(global-set-key (kbd "C-c p") 'previous-buffer)
+(global-set-key (kbd "M-1")   'previous-buffer)
+(global-set-key (kbd "M-3")   'next-buffer)
+(global-set-key (kbd "C-c n") 'next-buffer)
 
 (global-set-key (kbd "M-i") 'mark-sexp)
 
