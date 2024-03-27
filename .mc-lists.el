@@ -18,7 +18,9 @@
         indent-for-tab-command
         keyboard-escape-quit
         kill-region
+        mark-sexp
         mark-word
+        move-text-down
         paredit-delete-char
         shell-command
         toggle-input-method
@@ -27,6 +29,7 @@
 (setq mc/cmds-to-run-once
       '(
         compile
+        electric-pair-delete-pair
         enlarge-window
         evil-backward-char
         evil-delete

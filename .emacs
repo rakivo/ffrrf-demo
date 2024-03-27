@@ -66,12 +66,16 @@
 (global-set-key (kbd "C-c C-o") 'select-line)
 (global-set-key (kbd "C-c C-m") 'duplicate-line)
 
+(global-set-key (kbd "M-2") 'other-window)
+(global-set-key (kbd "M-q") 'find-file)
+
 (delete-selection-mode 1)
 
 (global-set-key (kbd "C-c C-k") 'kill-whole-line)
 (global-set-key (kbd "C-c C-<backspace>") 'kill-whole-line)
    
 (global-display-line-numbers-mode)
+(setq global-display-line-numbers 'relative)
 (setq display-line-numbers 'relative)
 
 (setq haskell-interactive-popup-errors nil)
@@ -178,6 +182,8 @@
 
 (add-to-list 'default-frame-alist `(font . ,(rc/get-default-font)))
 
+;; (set-face-attribute 'default nil :font "Ubuntu Mono-20")
+    
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
@@ -212,15 +218,15 @@
 (setq haskell-process-type 'cabal-new-repl)
 (setq haskell-process-log t)
 
-(add-hook 'haskell-mode-hook 'haskell-indent-mode)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+(setq haskell-indentation-mode nil)
 ;; (add-hook 'haskell-mode-hook 'haskell-doc-mode)
 ;; (add-hook 'haskell-mode-hook 'hindent-mode)
+(setq-default haskell-indent-offset 2)
 
 (require 'fasm-mode)
 (add-to-list 'auto-mode-alist '("\\.asm\\'" . fasm-mode))
 (require 'porth-mode)
-
 
 (require 'noq-mode)
 
@@ -290,11 +296,11 @@
 (require 'lsp-mode)                                                 
 (require 'lsp-ui)                                                   
 ;     UNCOMMENT IF WANT TO TURN OFF AUTOCOMPLETION HINTS 
-(setq lsp-completion-enable nil)
-; (setq lsp-completion-enable 1)
+;(setq lsp-completion-enable nil)
+(setq lsp-completion-enable 1)
 
-(setq lsp-ui-doc-enable nil
-      lsp-ui-sideline-enable nil)
+(setq lsp-ui-doc-enable nil)
+(setq lsp-ui-sideline-enable nil)
 
 (setq lsp-eldoc-render-all nil)
 (setq lsp-enable-symbol-highlighting nil)
@@ -448,8 +454,10 @@ compilation-error-regexp-alist-alist
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("e27c9668d7eddf75373fa6b07475ae2d6892185f07ebed037eedf783318761d7" "d19f00fe59f122656f096abbc97f5ba70d489ff731d9fa9437bac2622aaa8b89" "f366d4bc6d14dcac2963d45df51956b2409a15b770ec2f6d730e73ce0ca5c8a7" default))
  '(package-selected-packages
-    '(surround evil-surround wrap-region linum-relative column-enforce-mode zig-mode zenburn-theme yaml-mode xterm-color windswap vterm typescript-mode tuareg toml-mode tide sml-mode smex smartparens scala-mode ryo-modal rust-mode rfc-mode rainbow-mode racket-mode qml-mode purescript-mode proof-general projectile powershell php-mode parinfer-rust-mode org-cliplink nix-mode nim-mode nginx-mode nasm-mode multiple-cursors move-text magit-gitflow lua-mode lsp-ui kotlin-mode js2-mode jinja2-mode ido-completing-read+ hindent helm hc-zenburn-theme haskell-mode gruber-darker-theme graphviz-dot-mode go-mode glsl-mode ggtags evil emms elpy editorconfig dumb-jump dream-theme dockerfile-mode dash-functional d-mode counsel-etags cmake-mode clojure-mode anti-zenburn-theme ag)))
+   '(edit-server surround evil-surround wrap-region linum-relative column-enforce-mode zig-mode zenburn-theme yaml-mode xterm-color windswap vterm typescript-mode tuareg toml-mode tide sml-mode smex smartparens scala-mode ryo-modal rust-mode rfc-mode rainbow-mode racket-mode qml-mode purescript-mode proof-general projectile powershell php-mode parinfer-rust-mode org-cliplink nix-mode nim-mode nginx-mode nasm-mode multiple-cursors move-text magit-gitflow lua-mode lsp-ui kotlin-mode js2-mode jinja2-mode ido-completing-read+ hindent helm hc-zenburn-theme haskell-mode gruber-darker-theme graphviz-dot-mode go-mode glsl-mode ggtags evil emms elpy editorconfig dumb-jump dream-theme dockerfile-mode dash-functional d-mode counsel-etags cmake-mode clojure-mode anti-zenburn-theme ag)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
