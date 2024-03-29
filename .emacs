@@ -16,6 +16,24 @@
 ;; (require 'evil)
 ;; (evil-mode 1)
 
+(require 'corfu)
+(setq corfu-auto t
+      corfu-quit-no-match 'separator)
+(use-package corfu
+  :custom
+  (corfu-cycle t)           ;; Enable cycling for `corfu-next/previous'
+  (corfu-preselect 'prompt) ;; Always preselect the prompt
+
+  :bind
+  (:map corfu-map
+        ("C-n" . corfu-next)
+        ("C-p" . corfu-previous)
+        ([tab] . corfu-complete)
+        ([ret] . corfu-complete))
+
+  :init
+  (global-corfu-mode))
+
 (use-package surround :ensure t)
 
 (defun neg-mark-word ()
@@ -68,6 +86,7 @@
 
 (global-set-key (kbd "M-2") 'other-window)
 (global-set-key (kbd "M-q") 'find-file)
+(global-set-key (kbd "M-`") 'ivy-switch-buffer)
 
 (delete-selection-mode 1)
 
@@ -274,17 +293,19 @@
 
 (add-hook 'markdown-mode-hook 'rc/enable-word-wrap)
 
-(defun rc/turn-on-eldoc-mode ()
-  (interactive)
-  (eldoc-mode 1))
+;; (defun rc/turn-on-eldoc-mode ()
+;;   (interactive)
+;;   (eldoc-mode 1))
 
-(add-hook 'emacs-lisp-mode-hook 'rc/turn-on-eldoc-mode)
+;; (add-hook 'emacs-lisp-mode-hook 'rc/turn-on-eldoc-mode)
 
 ;;; Company
-(rc/require 'company)
-(require 'company)
+;; (rc/require 'company)
+;; (require 'company)
 
-(global-company-mode)
+(global-corfu-mode 1)
+(global-company-mode -1)
+(global-eldoc-mode -1)
 
 (add-hook 'tuareg-mode-hook
           (lambda ()
@@ -302,9 +323,10 @@
 (setq lsp-ui-doc-enable nil)
 (setq lsp-ui-sideline-enable nil)
 
-(setq lsp-eldoc-render-all nil)
+;; (setq lsp-eldoc-render-all nil)
+;; (setq lsp-eldoc-render-all nil)
+;; (setq lsp-eldoc-enable-hover nil)
 (setq lsp-enable-symbol-highlighting nil)
-(setq lsp-eldoc-render-all nil)
 (setq lsp-signature-render-documentation nil)
 
 (setq lsp-ui-doc-show-with-cursor nil)
@@ -316,7 +338,6 @@
 (setq lsp-diagnostics-provider :none)
 (setq lsp-ui-sideline-enable nil)
 (setq lsp-modeline-diagnostics-enable nil)
-(setq lsp-eldoc-enable-hover nil)
 (setq lsp-headerline-breadcrumb-enable nil)
 (setq lsp-ui-sideline-enable nil)
 
@@ -329,7 +350,6 @@
 (setq lsp-signature-auto-activate nil)
 
 ;(add-hook 'rust-mode-hook 'eglot-ensure)                                    
-(global-eldoc-mode -1)
 
 (add-hook 'rust-mode-hook 'lsp)
 (add-hook 'c-mode-hook 'lsp)
@@ -339,8 +359,8 @@
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
                                                                     
-(require 'company)                                                  
-(add-hook 'rust-mode-hook 'company-mode)                            
+;; (require 'company)                                                  
+;; (add-hook 'rust-mode-hook 'company-mode)                            
 ;; (define-key evil-normal-state-map (kbd "C-.") 'my-company-select-previous)
 (electric-pair-mode 1)
 
@@ -372,7 +392,7 @@
 (add-hook 'c-mode-common-hook
           (lambda ()
             (c-set-style "stroustrup")))
-(add-hook 'c-mode-common-hook 'company-mode)
+;; (add-hook 'c-mode-common-hook 'company-mode)
 (add-hook 'c-mode-common-hook 'ggtags-mode)
 (add-hook 'c-mode-common-hook 'flycheck-mode)
 
@@ -428,10 +448,10 @@
      t)
     (goto-line saved-line-number)))
 
-(use-package projectile
-  :ensure t
-  :config
-  (projectile-mode +1))
+;; (use-package projectile
+;;   :ensure t
+;;   :config
+;;   (projectile-mode +1))
 
 (global-set-key (kbd "M-s") 'shell-command)
 
@@ -444,8 +464,6 @@
 
 (require 'compile)
 
-compilation-error-regexp-alist-alist
-
 (add-to-list 'compilation-error-regexp-alist
              '("\\([a-zA-Z0-9\\.]+\\)(\\([0-9]+\\)\\(,\\([0-9]+\\)\\)?) \\(Warning:\\)?"
                1 2 (4) (5)))
@@ -455,9 +473,9 @@ compilation-error-regexp-alist-alist
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("e27c9668d7eddf75373fa6b07475ae2d6892185f07ebed037eedf783318761d7" "d19f00fe59f122656f096abbc97f5ba70d489ff731d9fa9437bac2622aaa8b89" "f366d4bc6d14dcac2963d45df51956b2409a15b770ec2f6d730e73ce0ca5c8a7" default))
+    '("e27c9668d7eddf75373fa6b07475ae2d6892185f07ebed037eedf783318761d7" "d19f00fe59f122656f096abbc97f5ba70d489ff731d9fa9437bac2622aaa8b89" "f366d4bc6d14dcac2963d45df51956b2409a15b770ec2f6d730e73ce0ca5c8a7" default))
  '(package-selected-packages
-   '(edit-server surround evil-surround wrap-region linum-relative column-enforce-mode zig-mode zenburn-theme yaml-mode xterm-color windswap vterm typescript-mode tuareg toml-mode tide sml-mode smex smartparens scala-mode ryo-modal rust-mode rfc-mode rainbow-mode racket-mode qml-mode purescript-mode proof-general projectile powershell php-mode parinfer-rust-mode org-cliplink nix-mode nim-mode nginx-mode nasm-mode multiple-cursors move-text magit-gitflow lua-mode lsp-ui kotlin-mode js2-mode jinja2-mode ido-completing-read+ hindent helm hc-zenburn-theme haskell-mode gruber-darker-theme graphviz-dot-mode go-mode glsl-mode ggtags evil emms elpy editorconfig dumb-jump dream-theme dockerfile-mode dash-functional d-mode counsel-etags cmake-mode clojure-mode anti-zenburn-theme ag)))
+    '(elpy corfu edit-server surround evil-surround wrap-region linum-relative column-enforce-mode zig-mode zenburn-theme yaml-mode xterm-color windswap vterm typescript-mode tuareg toml-mode tide sml-mode smex smartparens scala-mode ryo-modal rust-mode rfc-mode rainbow-mode racket-mode qml-mode purescript-mode proof-general projectile powershell php-mode parinfer-rust-mode org-cliplink nix-mode nim-mode nginx-mode nasm-mode multiple-cursors move-text magit-gitflow lua-mode lsp-ui kotlin-mode js2-mode jinja2-mode ido-completing-read+ hindent hc-zenburn-theme haskell-mode gruber-darker-theme graphviz-dot-mode go-mode glsl-mode ggtags evil emms editorconfig dumb-jump dream-theme dockerfile-mode dash-functional d-mode counsel-etags cmake-mode clojure-mode anti-zenburn-theme ag)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
