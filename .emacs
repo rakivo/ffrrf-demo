@@ -139,6 +139,8 @@
 
 (define-key global-map (kbd "C-?") #'comment-or-uncomment-region)
 
+(define-key global-map (kbd "M-<tab>") 'indent-region)
+
 (require 'move-text)
 (global-set-key (kbd "M-n") 'move-text-down)
 (global-set-key (kbd "M-p") 'move-text-up)
