@@ -82,6 +82,7 @@
 (global-set-key (kbd "C-c C-o") 'select-line)
 (global-set-key (kbd "C-c C-m") 'duplicate-line)
 
+(global-set-key (kbd "M-`") 'ivy-switch-buffer)
 (global-set-key (kbd "M-2") 'other-window)
 (global-set-key (kbd "M-q") 'find-file)
 (global-set-key (kbd "M-`") 'ivy-switch-buffer)
