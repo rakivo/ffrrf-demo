@@ -40,6 +40,7 @@
         evil-window-next
         evil-window-up
         pixel-scroll-precision
+        previous-error
         smex
         text-scale-adjust
         ))
