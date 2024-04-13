@@ -1,4 +1,4 @@
-ido.last~
+ido.last
 .cache
 .org
 auto-save-list
@@ -14,3 +14,4 @@ semanticdb
 smex-items
 transient
 emms
+/eris.el
