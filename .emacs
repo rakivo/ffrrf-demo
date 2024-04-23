@@ -64,21 +64,28 @@
 (global-set-key (kbd "C-M-o") 'insert-line-above-and-jump)
 (global-set-key (kbd "M-<return>") 'insert-line-above-and-jump)
 (global-set-key (kbd "C-<return>") 'insert-line-below-and-jump)
-(global-set-key (kbd "M-o") 'insert-line-above-and-jump)  
 (global-set-key (kbd "C-c C-o") 'select-line)
 (global-set-key (kbd "C-c C-m") 'duplicate-line)
 
 (global-set-key (kbd "M-2") 'other-window)
 (global-set-key (kbd "M-q") 'find-file)
 (global-set-key (kbd "M-`") 'ivy-switch-buffer)
+(global-set-key (kbd "M-s") 'shell-command)
+(global-set-key (kbd "M-e") 'grep-find)
+(global-set-key (kbd "M-r") 'recompile)
+(global-set-key (kbd "M-i") 'mark-sexp)
+(global-set-key (kbd "M-a") 'async-shell-command)
+(global-set-key (kbd "M-o") 'insert-line-above-and-jump)
+
+(global-set-key (kbd "TAB") 'tab-to-tab-stop)
 
 (delete-selection-mode 1)
 
 (global-set-key (kbd "C-c C-k") 'kill-whole-line)
 (global-set-key (kbd "C-c C-<backspace>") 'kill-whole-line)
-   
+
 ;; (global-whitespace-mode 1)
-;; (setq whitespace-style '(face spaces space-mark))
+;; (setq-default show-trailing-whitespace nil)
 
 (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative)))
 
@@ -86,8 +93,6 @@
 
 (defun set-rectangle-cursor ()
   (setq cursor-type 'box))
-
-(global-set-key (kbd "TAB") (lambda () (interactive) (insert "    ")))
 
 (set-default 'cursor-type 'box)
 (define-key global-map (kbd "M-h") #'windmove-left)
@@ -97,13 +102,9 @@
 
 (define-key global-map (kbd "C-?") #'comment-or-uncomment-region)
 
-(define-key global-map (kbd "M-<tab>") 'indent-region)
-
 (require 'move-text)
 (global-set-key (kbd "M-n") 'move-text-down)
 (global-set-key (kbd "M-p") 'move-text-up)
-(global-set-key (kbd "M-e") 'grep-find)
-(global-set-key (kbd "M-r") 'recompile)
 
 (require 'windswap)
 (global-set-key (kbd "C-S-b") 'windswap-left)
@@ -116,13 +117,9 @@
 (global-set-key (kbd "M-3")   'next-buffer)
 (global-set-key (kbd "C-c n") 'next-buffer)
 
-(global-set-key (kbd "M-i") 'mark-sexp)
-
 (global-set-key (kbd "C-0") 'shrink-window-horizontally)
 (global-set-key (kbd "C--") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-=") 'enlarge-window)
-
-(global-set-key (kbd "M-a") 'async-shell-command)
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
@@ -259,7 +256,7 @@
 (add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c-mode))
 (add-hook 'c++-mode-hook 'lsp)
-(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
                                                                     
 (electric-pair-mode 1)
@@ -332,13 +329,15 @@
      t)
     (goto-line saved-line-number)))
 
-(global-set-key (kbd "M-s") 'shell-command)
 (use-package ivy
   :ensure t
   :config
   (ivy-mode +1))
 
 (require 'compile)
+
+(load "~/.emacs.rc/mojo.el")
+(add-to-list 'auto-mode-alist '("\\.mojo\\'" . mojo-mode))
 
 (add-to-list 'compilation-error-regexp-alist
              '("\\([a-zA-Z0-9\\.]+\\)(\\([0-9]+\\)\\(,\\([0-9]+\\)\\)?) \\(Warning:\\)?"
@@ -348,11 +347,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- ;; '(custom-enabled-themes '(zenburn)
  '(custom-safe-themes
-    '("e27c9668d7eddf75373fa6b07475ae2d6892185f07ebed037eedf783318761d7" "d19f00fe59f122656f096abbc97f5ba70d489ff731d9fa9437bac2622aaa8b89" "f366d4bc6d14dcac2963d45df51956b2409a15b770ec2f6d730e73ce0ca5c8a7" default))
+   '("e27c9668d7eddf75373fa6b07475ae2d6892185f07ebed037eedf783318761d7" "d19f00fe59f122656f096abbc97f5ba70d489ff731d9fa9437bac2622aaa8b89" "f366d4bc6d14dcac2963d45df51956b2409a15b770ec2f6d730e73ce0ca5c8a7" default))
  '(package-selected-packages
-    '(erosiond-theme corfu edit-server surround evil-surround wrap-region column-enforce-mode zig-mode zenburn-theme yaml-mode xterm-color windswap vterm typescript-mode tuareg toml-mode tide sml-mode smex smartparens scala-mode ryo-modal rust-mode rfc-mode rainbow-mode racket-mode qml-mode purescript-mode proof-general projectile powershell php-mode parinfer-rust-mode org-cliplink nix-mode nim-mode nginx-mode nasm-mode multiple-cursors move-text magit-gitflow lua-mode lsp-ui kotlin-mode js2-mode jinja2-mode ido-completing-read+ hindent helm hc-zenburn-theme haskell-mode gruber-darker-theme graphviz-dot-mode go-mode glsl-mode ggtags evil emms editorconfig dumb-jump dream-theme dockerfile-mode dash-functional d-mode counsel-etags cmake-mode clojure-mode anti-zenburn-theme ag)))
+   '(forge magit-gh-pulls mojo-mode erosiond-theme corfu edit-server surround evil-surround wrap-region column-enforce-mode zig-mode zenburn-theme yaml-mode xterm-color windswap vterm typescript-mode tuareg toml-mode tide sml-mode smex smartparens scala-mode ryo-modal rust-mode rfc-mode rainbow-mode racket-mode qml-mode purescript-mode proof-general projectile powershell php-mode parinfer-rust-mode org-cliplink nix-mode nim-mode nginx-mode nasm-mode multiple-cursors move-text magit-gitflow lua-mode lsp-ui kotlin-mode js2-mode jinja2-mode ido-completing-read+ hindent helm hc-zenburn-theme haskell-mode gruber-darker-theme graphviz-dot-mode go-mode glsl-mode ggtags evil emms editorconfig dumb-jump dream-theme dockerfile-mode dash-functional d-mode counsel-etags cmake-mode clojure-mode anti-zenburn-theme ag)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

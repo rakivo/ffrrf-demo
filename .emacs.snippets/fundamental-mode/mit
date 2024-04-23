@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: mit
 # key: mit
+# expand-env: ((yas-indent-line 'fixed))
 # --
 Copyright `(format-time-string "%Y")` Mark Tyrkba <marktyrkba456@gmail.com>
 
