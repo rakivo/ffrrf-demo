@@ -128,10 +128,10 @@
 (add-to-list 'load-path "~/.emacs.local/")
 (load "~/.emacs.rc/rc.el")
 
-(defun rc/get-default-font ()
-  (cond
-   ((eq system-type 'windows-nt) "Consolas-13")
-   ((eq system-type 'gnu/linux) "Iosevka-20")))
+;; (defun rc/get-default-font ()
+;;   (cond
+;;    ((eq system-type 'windows-nt) "Consolas-13")
+;;    ((eq system-type 'gnu/linux) "Iosevka-20")))
 
 (add-to-list 'default-frame-alist `(font . ,(rc/get-default-font)))
     
@@ -141,13 +141,26 @@
 (column-number-mode 1)
 (show-paren-mode 1)
 
-(rc/require-theme 'gruber-darker)
+(set-frame-font "Ubuntu Mono-20" nil t)
+
+;; (rc/require-theme 'gruber-darker)
 ;; (rc/require-theme 'erosiond)
-;; (rc/require-theme 'zenburn)
+(rc/require-theme 'zenburn)
 ;; (load-theme 'adwaita t)
 
 ;; (eval-after-load 'zenburn
 ;;   (set-face-attribute 'line-number nil :inherit 'default))
+
+;; (rc/require-theme 'erosiond)
+;; (rc/require-theme 'zenburn)
+
+(custom-set-faces
+  '(font-lock-keyword-face ((t (:foreground "#F0DFAF" :weight bold))))
+  '(font-lock-variable-name-face ((t (:foreground "#DCDCCC"))))
+  '(font-lock-constant-face ((t (:foreground "#96A6C8")))) 
+  '(font-lock-function-name-face ((t (:foreground "#94BFF3"))))
+  '(font-lock-reference-face ((t (:foreground, "#DCDCCC"))))
+  '(font-lock-type-face ((t (:foreground "#F0DFAF" :weight bold)))))
 
 (rc/require 'smex 'ido-completing-read+)
 
