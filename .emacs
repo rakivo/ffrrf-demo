@@ -120,6 +120,7 @@
 (global-set-key (kbd "C-0") 'shrink-window-horizontally)
 (global-set-key (kbd "C--") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-=") 'enlarge-window)
+(global-set-key (kbd "M-.") 'lsp-find-definition)
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
@@ -128,10 +129,10 @@
 (add-to-list 'load-path "~/.emacs.local/")
 (load "~/.emacs.rc/rc.el")
 
-;; (defun rc/get-default-font ()
-;;   (cond
-;;    ((eq system-type 'windows-nt) "Consolas-13")
-;;    ((eq system-type 'gnu/linux) "Iosevka-20")))
+(defun rc/get-default-font ()
+  (cond
+   ((eq system-type 'windows-nt) "Consolas-13")
+   ((eq system-type 'gnu/linux) "Iosevka-20")))
 
 (add-to-list 'default-frame-alist `(font . ,(rc/get-default-font)))
     
@@ -141,12 +142,11 @@
 (column-number-mode 1)
 (show-paren-mode 1)
 
-(set-frame-font "Ubuntu Mono-20" nil t)
+;; (set-frame-font "Ubuntu Mono-20" nil t)
 
-;; (rc/require-theme 'gruber-darker)
+(rc/require-theme 'gruber-darker)
 ;; (rc/require-theme 'erosiond)
-(rc/require-theme 'zenburn)
-;; (load-theme 'adwaita t)
+;; (rc/require-theme 'zenburn)
 
 ;; (eval-after-load 'zenburn
 ;;   (set-face-attribute 'line-number nil :inherit 'default))
@@ -154,13 +154,13 @@
 ;; (rc/require-theme 'erosiond)
 ;; (rc/require-theme 'zenburn)
 
-(custom-set-faces
-  '(font-lock-keyword-face ((t (:foreground "#F0DFAF" :weight bold))))
-  '(font-lock-variable-name-face ((t (:foreground "#DCDCCC"))))
-  '(font-lock-constant-face ((t (:foreground "#96A6C8")))) 
-  '(font-lock-function-name-face ((t (:foreground "#94BFF3"))))
-  '(font-lock-reference-face ((t (:foreground, "#DCDCCC"))))
-  '(font-lock-type-face ((t (:foreground "#F0DFAF" :weight bold)))))
+;; (custom-set-faces
+;;   '(font-lock-keyword-face ((t (:foreground "#F0DFAF" :weight bold))))
+;;   '(font-lock-variable-name-face ((t (:foreground "#DCDCCC"))))
+;;   '(font-lock-constant-face ((t (:foreground "#96A6C8")))) 
+;;   '(font-lock-function-name-face ((t (:foreground "#94BFF3"))))
+;;   '(font-lock-reference-face ((t (:foreground, "#DCDCCC"))))
+;;   '(font-lock-type-face ((t (:foreground "#F0DFAF" :weight bold)))))
 
 (rc/require 'smex 'ido-completing-read+)
 
@@ -293,9 +293,10 @@
                       (string-suffix-p ".h" buffer-file-name))
               (c-set-style "stroustrup"))))
 (add-hook 'c-mode-common-hook (lambda () (c-set-style "stroustrup")))
-(add-hook 'c-mode-common-hook 'ggtags-mode)
 (add-hook 'c-mode-common-hook 'flycheck-mode)
-(add-hook 'c-mode-common-hook (lambda () (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode 'rust-mode) (ggtags-mode 1))))
+(add-hook 'c-mode-common-hook (lambda () (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode 'rust-mode) (lsp-mode 1))))
+
+(setq c-basic-offset 4)
 
 (rc/require
  'scala-mode
@@ -361,9 +362,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("e27c9668d7eddf75373fa6b07475ae2d6892185f07ebed037eedf783318761d7" "d19f00fe59f122656f096abbc97f5ba70d489ff731d9fa9437bac2622aaa8b89" "f366d4bc6d14dcac2963d45df51956b2409a15b770ec2f6d730e73ce0ca5c8a7" default))
+    '("e27c9668d7eddf75373fa6b07475ae2d6892185f07ebed037eedf783318761d7" "d19f00fe59f122656f096abbc97f5ba70d489ff731d9fa9437bac2622aaa8b89" "f366d4bc6d14dcac2963d45df51956b2409a15b770ec2f6d730e73ce0ca5c8a7" default))
  '(package-selected-packages
-   '(forge magit-gh-pulls mojo-mode erosiond-theme corfu edit-server surround evil-surround wrap-region column-enforce-mode zig-mode zenburn-theme yaml-mode xterm-color windswap vterm typescript-mode tuareg toml-mode tide sml-mode smex smartparens scala-mode ryo-modal rust-mode rfc-mode rainbow-mode racket-mode qml-mode purescript-mode proof-general projectile powershell php-mode parinfer-rust-mode org-cliplink nix-mode nim-mode nginx-mode nasm-mode multiple-cursors move-text magit-gitflow lua-mode lsp-ui kotlin-mode js2-mode jinja2-mode ido-completing-read+ hindent helm hc-zenburn-theme haskell-mode gruber-darker-theme graphviz-dot-mode go-mode glsl-mode ggtags evil emms editorconfig dumb-jump dream-theme dockerfile-mode dash-functional d-mode counsel-etags cmake-mode clojure-mode anti-zenburn-theme ag)))
+    '(forge magit-gh-pulls mojo-mode erosiond-theme corfu edit-server surround evil-surround wrap-region column-enforce-mode zig-mode zenburn-theme yaml-mode xterm-color windswap vterm typescript-mode tuareg toml-mode tide sml-mode smex smartparens scala-mode ryo-modal rust-mode rfc-mode rainbow-mode racket-mode qml-mode purescript-mode proof-general projectile powershell php-mode parinfer-rust-mode org-cliplink nix-mode nim-mode nginx-mode nasm-mode multiple-cursors move-text magit-gitflow lua-mode lsp-ui kotlin-mode js2-mode jinja2-mode ido-completing-read+ hindent helm hc-zenburn-theme haskell-mode gruber-darker-theme graphviz-dot-mode go-mode glsl-mode evil emms editorconfig dumb-jump dream-theme dockerfile-mode dash-functional d-mode counsel-etags cmake-mode clojure-mode anti-zenburn-theme ag)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
