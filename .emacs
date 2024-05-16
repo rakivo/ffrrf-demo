@@ -156,15 +156,11 @@
 
 (rc/require-theme 'zenburn)
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(font-lock-constant-face ((t (:foreground "#96A6C8"))))
  '(font-lock-function-name-face ((t (:foreground "#94BFF3"))))
  '(font-lock-keyword-face ((t (:foreground "#F0DFAF" :weight bold))))
  '(font-lock-reference-face ((t (:foreground (\, "#DCDCCC")))))
- '(font-lock-type-face ((t (:foreground "#FFDD33" :weight bold))))
+ '(font-lock-type-face ((t (:foreground "#F0DFAF" :weight bold))))
  '(font-lock-variable-name-face ((t (:foreground "#DCDCCC")))))
 
 (rc/require 'smex 'ido-completing-read+)
