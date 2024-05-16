@@ -142,9 +142,11 @@
 (column-number-mode 1)
 (show-paren-mode 1)
 
-(good-scroll-mode 1)
-(global-set-key (kbd "C-v") (lambda () (interactive) (good-scroll-move 700)))
-(global-set-key (kbd "M-v") (lambda () (interactive) (good-scroll-move -700)))
+(setq redisplay-dont-pause t
+  scroll-margin 1
+  scroll-step 1
+  scroll-conservatively 10000
+  scroll-preserve-screen-position 1)
 
 ;; (set-frame-font "Ubuntu Mono-20" nil t)
 
@@ -162,7 +164,7 @@
  '(font-lock-function-name-face ((t (:foreground "#94BFF3"))))
  '(font-lock-keyword-face ((t (:foreground "#F0DFAF" :weight bold))))
  '(font-lock-reference-face ((t (:foreground (\, "#DCDCCC")))))
- '(font-lock-type-face ((t (:foreground "#F0DFAF" :weight bold))))
+ '(font-lock-type-face ((t (:foreground "#FFDD33" :weight bold))))
  '(font-lock-variable-name-face ((t (:foreground "#DCDCCC")))))
 
 (rc/require 'smex 'ido-completing-read+)
@@ -376,6 +378,6 @@
  '(custom-safe-themes
     '("e27c9668d7eddf75373fa6b07475ae2d6892185f07ebed037eedf783318761d7" "d19f00fe59f122656f096abbc97f5ba70d489ff731d9fa9437bac2622aaa8b89" "f366d4bc6d14dcac2963d45df51956b2409a15b770ec2f6d730e73ce0ca5c8a7" default))
  '(package-selected-packages
-    '(good-scroll forge magit-gh-pulls mojo-mode erosiond-theme corfu edit-server surround evil-surround wrap-region column-enforce-mode zenburn-theme yaml-mode xterm-color windswap vterm typescript-mode tuareg toml-mode tide sml-mode smex smartparens scala-mode ryo-modal rust-mode rfc-mode rainbow-mode racket-mode qml-mode purescript-mode proof-general projectile powershell php-mode parinfer-rust-mode org-cliplink nix-mode nim-mode nginx-mode nasm-mode multiple-cursors move-text magit-gitflow lua-mode lsp-ui kotlin-mode js2-mode jinja2-mode ido-completing-read+ hindent helm hc-zenburn-theme haskell-mode gruber-darker-theme graphviz-dot-mode go-mode glsl-mode evil emms editorconfig dumb-jump dream-theme dockerfile-mode dash-functional d-mode counsel-etags cmake-mode clojure-mode anti-zenburn-theme ag)))
+    '(forge magit-gh-pulls mojo-mode erosiond-theme corfu edit-server surround evil-surround wrap-region column-enforce-mode zenburn-theme yaml-mode xterm-color windswap vterm typescript-mode tuareg toml-mode tide sml-mode smex smartparens scala-mode ryo-modal rust-mode rfc-mode rainbow-mode racket-mode qml-mode purescript-mode proof-general projectile powershell php-mode parinfer-rust-mode org-cliplink nix-mode nim-mode nginx-mode nasm-mode multiple-cursors move-text magit-gitflow lua-mode lsp-ui kotlin-mode js2-mode jinja2-mode ido-completing-read+ hindent helm hc-zenburn-theme haskell-mode gruber-darker-theme graphviz-dot-mode go-mode glsl-mode evil emms editorconfig dumb-jump dream-theme dockerfile-mode dash-functional d-mode counsel-etags cmake-mode clojure-mode anti-zenburn-theme ag)))
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
