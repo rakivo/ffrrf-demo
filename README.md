@@ -5,4 +5,4 @@
 make -B && ./main
 ```
 
-### Oahh, by the way, you gotta be rocking GNU/Linux to du dat
+### Oahh, by the way, you gotta be rocking x86_64 GNU/Linux to du dat
