@@ -42,6 +42,8 @@
 ;; (global-set-key (kbd "<tab>") #'company-indent-or-complete-common)
 (global-set-key (kbd "TAB") 'tab-to-tab-stop)
 (global-set-key (kbd "M-<tab>") 'company-complete-selection)
+(global-set-key (kbd "M-]") 'company-select-next)
+(global-set-key (kbd "M-[") 'company-select-previous)
 
 (use-package surround :ensure t)
 
@@ -167,23 +169,33 @@
 
 ;; (set-frame-font "Ubuntu Mono-20" nil t)
 
-(rc/require-theme 'gruber-darker)
+;; (rc/require-theme 'gruber-darker)
 ;; (custom-set-faces
 ;;   '(font-lock-type-face ((t (:foreground "#FFDD33" :weight bold)))))
 
-;; (rc/require-theme 'zenburn)
-;; (custom-set-faces
-;;  '(font-lock-constant-face ((t (:foreground "#96A6C8"))))
-;;  '(font-lock-function-name-face ((t (:foreground "#94BFF3"))))
-;;  '(font-lock-keyword-face ((t (:foreground "#F0DFAF" :weight bold))))
-;;  '(font-lock-reference-face ((t (:foreground (\, "#DCDCCC")))))
-;;  '(font-lock-type-face ((t (:foreground "#F0DFAF" :weight bold))))
-;;  '(font-lock-variable-name-face ((t (:foreground "#DCDCCC")))))
-;; (defun rust-unsafe ()
-;;   (font-lock-add-keywords nil
-;;     '(("\\<\\(unsafe\\)\\>"
-;;        1 '(:foreground "ff4f58") t))))
-;; (add-hook 'rust-mode-hook 'rust-unsafe)
+(rc/require-theme 'zenburn)
+(custom-set-faces
+ '(font-lock-constant-face ((t (:foreground "#96A6C8"))))
+ '(font-lock-function-name-face ((t (:foreground "#94BFF3"))))
+ '(font-lock-keyword-face ((t (:foreground "#F0DFAF" :weight bold))))
+ '(font-lock-reference-face ((t (:foreground (\, "#DCDCCC")))))
+ '(font-lock-type-face ((t (:foreground "#F0DFAF" :weight bold))))
+ '(font-lock-variable-name-face ((t (:foreground "#DCDCCC")))))
+(defun rust-unsafe ()
+  (font-lock-add-keywords nil
+    '(("\\<\\(unsafe\\)\\>"
+       1 '(:foreground "ff4f58") t))))
+(add-hook 'rust-mode-hook 'rust-unsafe)
+
+(setq whitespace-display-mappings
+      '((space-mark 32 [183] [46])
+        (newline-mark 0)
+        (tab-mark 9 [9655 9] [92 9])))
+
+(custom-set-faces
+ '(whitespace-space ((t (:foreground "gray40" :background nil)))))
+
+(setq whitespace-style '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))
 
 (rc/require 'smex 'ido-completing-read+)
 
