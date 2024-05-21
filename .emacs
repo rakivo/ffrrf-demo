@@ -103,7 +103,7 @@
 (global-set-key (kbd "C-c C-k") 'kill-whole-line)
 (global-set-key (kbd "C-c C-<backspace>") 'kill-whole-line)
 
-;; (global-whitespace-mode 1)
+(global-whitespace-mode 1)
 ;; (setq-default show-trailing-whitespace nil)
 
 (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative)))
@@ -167,7 +167,7 @@
   scroll-conservatively 10000
   scroll-preserve-screen-position 1)
 
-;; (set-frame-font "Ubuntu Mono-20" nil t)
+(set-frame-font "Ubuntu Mono-20" nil t)
 
 ;; (rc/require-theme 'gruber-darker)
 ;; (custom-set-faces
@@ -384,9 +384,14 @@
  'typescript-mode
  'rfc-mode
  'sml-mode
- )
+)
+
+(setq-default tab-width 4)
+(setq-default c-basic-offset 4)
+(setq-default indent-tabs-mode nil)
 
 (load "~/.emacs.shadow/shadow-rc.el" t)
+
 (defun astyle-buffer (&optional justify)
   (interactive)
   (let ((saved-line-number (line-number-at-pos)))
