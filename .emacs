@@ -8,12 +8,15 @@
 (setq x-super-keysym 'meta)
 (setq x-alt-keysym 'capslock)
 
+(with-eval-after-load 'rust-mode
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
 ;; (require 'corfu)
 ;; (setq corfu-auto t
 ;;       corfu-quit-no-match 'separator)
 ;; (use-package corfu
 ;;   :custom
-;;   (corfu-cycle t)          
+;;   (corfu-cycle t)
 ;;   (corfu-preselect 'prompt)
 ;;   :bind
 ;;   (:map corfu-map
@@ -48,7 +51,7 @@
 (use-package surround :ensure t)
 
 (defun duplicate-line()
-  "Dup curr. line"    
+  "Dup curr. line"
   (interactive)
   (move-beginning-of-line 1)
   (kill-line)
@@ -154,7 +157,7 @@
    ((eq system-type 'gnu/linux) "Iosevka-20")))
 
 (add-to-list 'default-frame-alist `(font . ,(rc/get-default-font)))
-    
+
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
@@ -167,33 +170,50 @@
   scroll-conservatively 10000
   scroll-preserve-screen-position 1)
 
-(set-frame-font "Ubuntu Mono-20" nil t)
-
-;; (rc/require-theme 'gruber-darker)
-;; (custom-set-faces
-;;   '(font-lock-type-face ((t (:foreground "#FFDD33" :weight bold)))))
-
-(rc/require-theme 'zenburn)
 (custom-set-faces
- '(font-lock-constant-face ((t (:foreground "#96A6C8"))))
- '(font-lock-function-name-face ((t (:foreground "#94BFF3"))))
- '(font-lock-keyword-face ((t (:foreground "#F0DFAF" :weight bold))))
- '(font-lock-reference-face ((t (:foreground (\, "#DCDCCC")))))
- '(font-lock-type-face ((t (:foreground "#F0DFAF" :weight bold))))
- '(font-lock-variable-name-face ((t (:foreground "#DCDCCC")))))
-(defun rust-unsafe ()
-  (font-lock-add-keywords nil
-    '(("\\<\\(unsafe\\)\\>"
-       1 '(:foreground "ff4f58") t))))
-(add-hook 'rust-mode-hook 'rust-unsafe)
+  '(font-lock-builtin-face ((t (:foreground "#ffdd33"))))
+  '(font-lock-comment-face ((t (:foreground "#cc8c3c"))))
+  '(font-lock-comment-delimiter-face ((t (:foreground "#cc8c3c"))))
+  '(font-lock-constant-face ((t (:foreground "#95a99f"))))
+  '(font-lock-doc-face ((t (:foreground "#73c936"))))
+  '(font-lock-doc-string-face ((t (:foreground "#73c936"))))
+  '(font-lock-function-name-face ((t (:foreground "#96a6c8"))))
+  '(font-lock-keyword-face ((t (:foreground "#ffdd33" :bold t))))
+  '(font-lock-preprocessor-face ((t (:foreground "#95a99f"))))
+  '(font-lock-reference-face ((t (:foreground "#95a99f"))))
+  '(font-lock-string-face ((t (:foreground "#73c936"))))
+  '(font-lock-type-face ((t (:foreground "#95a99f"))))
+  '(font-lock-variable-name-face ((t (:foreground "#f4f4ff"))))
+  '(font-lock-warning-face ((t (:foreground "#ff4f58")))))
+  ;; '(font-lock-keyword-face ((t (:foreground "#FFDD33"))))
+  ;; '(font-lock-type-face ((t (:foreground "#FFDD33" :weight bold)))))
+
+(rc/require-theme 'gruber-darker)
+
+;; (set-frame-font "Ubuntu Sans Mono-20" nil t)
+
+;; (rc/require-theme 'zenburn)
+;; (custom-set-faces
+;;  '(font-lock-constant-face ((t (:foreground "#96A6C8"))))
+;;  '(font-lock-function-name-face ((t (:foreground "#94BFF3"))))
+;;  '(font-lock-keyword-face ((t (:foreground "#F0DFAF"))))
+;;  '(font-lock-reference-face ((t (:foreground (\, "#DCDCCC")))))
+;;  '(font-lock-type-face ((t (:foreground "#F0DFAF"))))
+;;  '(font-lock-variable-name-face ((t (:foreground "#DCDCCC")))))
+
+;; (defun rust-unsafe ()
+;;   (font-lock-add-keywords nil
+;;     '(("\\<\\(unsafe\\)\\>"
+;;        1 '(:foreground "ff4f58") t))))
+;; (add-hook 'rust-mode-hook 'rust-unsafe)
 
 (setq whitespace-display-mappings
       '((space-mark 32 [183] [46])
         (newline-mark 0)
-        (tab-mark 9 [9655 9] [92 9])))
+        (tab-mark 0)))
 
 (custom-set-faces
- '(whitespace-space ((t (:foreground "gray40" :background nil)))))
+ '(whitespace-space ((t (:foreground "gray25" :background nil)))))
 
 (setq whitespace-style '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))
 
@@ -210,8 +230,10 @@
                        (interactive)
                        (setq c-basic-offset 4)
                        (setq tab-width 4)
-                       (c-set-style "linux")
+                       (define-key c-mode-map (kbd "C-M-\\") 'c-indent-line-or-region)
                        (c-toggle-comment-style -1)))
+
+(setq c-basic-offset 4)
 
 (rc/require 'haskell-mode)
 (setq haskell-process-type 'cabal-new-repl)
@@ -225,7 +247,7 @@
 (add-to-list 'auto-mode-alist '("\\.asm\\'" . fasm-mode))
 (require 'porth-mode)
 
-(require 'zig-mode)
+;; (require 'zig-mode)
 
 (add-to-list 'auto-mode-alist '("\\.zig\\'" . zig-mode))
 (add-to-list 'auto-mode-alist '("\\.zon\\'" . zig-mode))
@@ -272,10 +294,10 @@
 ;; (global-corfu-mode 1)
 (global-company-mode 1)
 (global-eldoc-mode -1)
- 
-(require 'lsp-mode)                                                 
-(require 'lsp-ui)                                                   
-;     UNCOMMENT IF WANT TO TURN OFF AUTOCOMPLETION HINTS 
+
+(require 'lsp-mode)
+(require 'lsp-ui)
+;     UNCOMMENT IF WANT TO TURN OFF AUTOCOMPLETION HINTS
 ; (setq lsp-completion-enable nil)
 (setq lsp-completion-enable 1)
 
@@ -301,11 +323,11 @@
 (setq lsp-ui-sideline-enable nil)
 
 (setq lsp-ui-sideline-show-hover nil)
-(setq lsp-ui-sideline-show-code-actions nil) 
-(setq lsp-ui-imenu-enable nil) 
-(setq lsp-ui-flycheck-enable nil) 
-(setq lsp-ui-peek-enable nil) 
-(setq lsp-ui-scratch-enable nil) 
+(setq lsp-ui-sideline-show-code-actions nil)
+(setq lsp-ui-imenu-enable nil)
+(setq lsp-ui-flycheck-enable nil)
+(setq lsp-ui-peek-enable nil)
+(setq lsp-ui-scratch-enable nil)
 (setq lsp-signature-auto-activate nil)
 
 (add-hook 'c-mode-hook 'lsp)
@@ -315,7 +337,7 @@
 (add-hook 'c++-mode-hook 'lsp)
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
-                                                                    
+
 (electric-pair-mode 1)
 
 (setq electric-pair-pairs '(
@@ -410,8 +432,8 @@
 
 (require 'compile)
 
-(load "~/.emacs.rc/mojo.el")
-(add-to-list 'auto-mode-alist '("\\.mojo\\'" . mojo-mode))
+;; (load "~/.emacs.rc/mojo.el")
+;; (add-to-list 'auto-mode-alist '("\\.mojo\\'" . mojo-mode))
 
 (add-to-list 'compilation-error-regexp-alist
              '("\\([a-zA-Z0-9\\.]+\\)(\\([0-9]+\\)\\(,\\([0-9]+\\)\\)?) \\(Warning:\\)?"
@@ -423,14 +445,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-    '("e27c9668d7eddf75373fa6b07475ae2d6892185f07ebed037eedf783318761d7" "d19f00fe59f122656f096abbc97f5ba70d489ff731d9fa9437bac2622aaa8b89" "f366d4bc6d14dcac2963d45df51956b2409a15b770ec2f6d730e73ce0ca5c8a7" default))
+   '("e27c9668d7eddf75373fa6b07475ae2d6892185f07ebed037eedf783318761d7" "d19f00fe59f122656f096abbc97f5ba70d489ff731d9fa9437bac2622aaa8b89" "f366d4bc6d14dcac2963d45df51956b2409a15b770ec2f6d730e73ce0ca5c8a7" default))
  '(package-selected-packages
-    '(company forge magit-gh-pulls mojo-mode erosiond-theme edit-server surround evil-surround wrap-region column-enforce-mode zenburn-theme yaml-mode xterm-color windswap vterm typescript-mode tuareg toml-mode tide sml-mode smex smartparens scala-mode ryo-modal rust-mode rfc-mode rainbow-mode racket-mode qml-mode purescript-mode proof-general projectile powershell php-mode parinfer-rust-mode org-cliplink nix-mode nim-mode nginx-mode nasm-mode multiple-cursors move-text magit-gitflow lua-mode lsp-ui kotlin-mode js2-mode jinja2-mode ido-completing-read+ hindent helm hc-zenburn-theme haskell-mode gruber-darker-theme graphviz-dot-mode go-mode glsl-mode evil emms editorconfig dumb-jump dream-theme dockerfile-mode dash-functional d-mode counsel-etags cmake-mode clojure-mode anti-zenburn-theme ag)))
+   '(flycheck-rust company forge magit-gh-pulls mojo-mode erosiond-theme edit-server surround evil-surround wrap-region column-enforce-mode zenburn-theme yaml-mode xterm-color windswap vterm typescript-mode tuareg toml-mode tide sml-mode smex smartparens scala-mode ryo-modal rust-mode rfc-mode rainbow-mode racket-mode qml-mode purescript-mode proof-general projectile powershell php-mode parinfer-rust-mode org-cliplink nix-mode nim-mode nginx-mode nasm-mode multiple-cursors move-text magit-gitflow lua-mode lsp-ui kotlin-mode js2-mode jinja2-mode ido-completing-read+ hindent helm hc-zenburn-theme haskell-mode gruber-darker-theme graphviz-dot-mode go-mode glsl-mode evil emms editorconfig dumb-jump dream-theme dockerfile-mode dash-functional d-mode counsel-etags cmake-mode clojure-mode anti-zenburn-theme ag)))
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
